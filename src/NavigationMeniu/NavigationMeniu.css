@@ -1,0 +1,11 @@
+.NavigationMeniu {
+    display: flex;
+    justify-content:flex-start;
+    margin: 1px;  
+    border: 2px solid black;
+    flex-direction: column;
+    height: 500px;
+    width: 100px;    
+}
+
+

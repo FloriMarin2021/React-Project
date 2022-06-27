@@ -1,0 +1,49 @@
+.TaskForm {
+    display: flex;
+    align-content: center;
+    border: 2px solid black;
+    width: 500px;
+    height: 600px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.FormHeader {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.FormDescription, .FormDate, .FormNotes {
+    margin-left: 5px;
+    font-style: normal;
+}
+
+.FormDescriptionBtn, .FormDateBtn, .FormNotesBtn {
+    border: 2px solid black;  
+    margin-top: 15px;
+}
+
+.FormDescriptionBtn{
+    margin-left: 10px;
+    height: 20px;
+}
+
+.FormDateBtn{
+    margin-left: 55px;
+    height: 20px;
+}
+
+.FormNotesBtn{
+    margin-left: 50px;
+    height: 70px;
+}
+
+.AddTask {
+    margin-top: 20px;
+    margin-left: 270px;
+}
+
+.AddTaskBtn {
+    height: 30px;
+    width: 100px;
+}
