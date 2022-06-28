@@ -3,31 +3,24 @@ import './TaskForm.css';
 
 const TaskForm=()=>{
     return (
-        <div className='TaskForm'>               
-             <form className="Form"> 
-
-               <h1 className='FormHeader'>FORM</h1>
-
-               <div className="FormDescription"> Description:       
-               <input type="text"  className="FormDescriptionBtn"/>
+        <div className='task-form'>               
+            <form className="task-form_forms">
+               <h1 className='task-form_forms_header'>FORM</h1>
+               <div className="task-form_forms_describe"> Description:       
+                   <input type="text"  className="task-form_forms_describe_btn"/>
                </div>
-
-               <div className="FormDate"> Date:       
-               <input type="text"  className="FormDateBtn"/>
+               <div className="task-form_forms_date"> Date:       
+                   <input type="text"  className="task-form_forms_date_btn"/>
                </div>
-
-               <div className="FormNotes"> Notes:       
-               <input type="text"  className="FormNotesBtn"/>
+               <div className="task-form_forms_notes"> Notes:       
+                   <input type="text"  className="task-form_forms_notes_btn"/>
                </div>
-
-               <div className='AddTask'>           
-               <button  className='AddTaskBtn'> Add Task</button>
+               <div className='task-form_forms_add'>           
+                   <button  className="task-form_forms_add_btn"> Add Task</button>
                </div>
-
-             </form>
+            </form>
         </div>
-        );
-       
+        );       
 }
 
 export default TaskForm

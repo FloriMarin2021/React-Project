@@ -1,4 +1,4 @@
-.TaskForm {
+.task-form {
     display: flex;
     align-content: center;
     border: 2px solid black;
@@ -8,42 +8,41 @@
     margin-left: 20px;
 }
 
-.FormHeader {
+.task-form_forms_header {
     font-size: 25px;
     margin-left: 5px;
 }
 
-.FormDescription, .FormDate, .FormNotes {
+.task-form_forms_describe, .task-form_forms_date, .task-form_forms_notes {
     margin-left: 5px;
-    font-style: normal;
 }
 
-.FormDescriptionBtn, .FormDateBtn, .FormNotesBtn {
+.task-form_forms_describe_btn, .task-form_forms_date_btn, .task-form_forms_notes_btn {
     border: 2px solid black;  
     margin-top: 15px;
 }
 
-.FormDescriptionBtn{
+.task-form_forms_describe_btn{
     margin-left: 10px;
     height: 20px;
 }
 
-.FormDateBtn{
+.task-form_forms_date_btn{
     margin-left: 55px;
     height: 20px;
 }
 
-.FormNotesBtn{
+.task-form_forms_notes_btn {
     margin-left: 50px;
     height: 70px;
 }
 
-.AddTask {
+.task-form_forms_add {
     margin-top: 20px;
     margin-left: 270px;
 }
 
-.AddTaskBtn {
+.task-form_forms_add_btn {
     height: 30px;
     width: 100px;
 }

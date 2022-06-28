@@ -7,12 +7,10 @@ const App=()=>{
        
         return ( 
         <div>
-         <MyTasksPage/>
+           <MyTasksPage/>
         </div>
         );
     }    
     
-    
-    
-//take the react component and show it on the screen    
+      
 ReactDOM.render(<App/>, document.getElementById('root'));
