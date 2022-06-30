@@ -1,44 +1,25 @@
 import React from 'react';
-import Header from './Header/Header';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
+import Header from './Header/Header';
 import TaskForm from './TaskForm/TaskForm';
-//import './MyTasksPage.css';
+import TaskTable from './TaskTable';
+import Table from './Table';
 
-class MyTasksPage extends React.Component{
-  constructor(props){
-    super(props);
 
-    this.state={
-      myTasks:[
-        {
-          id: 'open',
-          label:'open'
-        }, 
-
-        {
-          id: 'in progress',
-          label:'in progress'
-        },
-
-        {
-          id: 'done',
-          label:'done'
-        } 
-          
-      ],
-        };
-  }
+class MyTasksPage extends React.Component{ 
 
    render() {
        return (
         <div className='MyTasksPage'>
-           <NavigationMeniu title='first item'/>
+           <NavigationMeniu />
            <Header />
-           <TaskForm />                     
+           <TaskForm />  
+           <TaskTable/>   
+           <Table/>                
         </div>   
        );
    }
 }
-   
+
 
 export default MyTasksPage;
