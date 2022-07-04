@@ -24,30 +24,23 @@ var  myTasks=[
             }                
           ];
 
-const Table=()=>{
-    const [list, setList] = React.useState(myTasks);           
-    function handleRemove (id){
-            const newList=list.filter((item)=>item.id!==id);
-            setList(newList); }
 
-            return (
-              <List list={list} onRemove={handleRemove}/>
-                    );
-            }
+             
+    function handleRemove (id){
+      const [list, setList] = React.useState(tasks);  
+      const newList=list.filter((item)=>item.id!==id);
+      setList(newList); }
+
+      return (
+        <List list={list} onRemove={handleRemove}/>
+              );
+      
 
 
           
 const List=({list, onRemove})=>( 
   <div>       
-    <table> 
-      <tr>
-         <th>Id </th>
-         <th>Description</th>
-         <th>Date</th>
-         <th>Status</th>
-         <th>Action</th>
-       </tr>     
-    </table> 
+    
        {list.map((item)=>(<Item item={item} onRemove={onRemove}/>))}
     </div>
   

@@ -1,16 +1,84 @@
 import React from 'react';
-import MyTasksPage from './MyTasksPage';
+//import MyTaskPage  from './MyTasksPage';
 
-function TaskTable({tasks}){ 
+
+function TaskTable({tasks, deleteRow}){ 
+  
+  return(
+    <div>      
+     <table className='table'>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>           
+        <tbody>           
+            {tasks.map((task)=>{
+              return (               
+                <tr >
+                    <td>{task.nr}</td>
+                    <td>{task.description}</td>
+                    <td>{task.date}</td>
+                    <td>                                                           
+                        <select> 
+                          {task.status.map((item)=>{
+                            return(
+                              <option>{item.label}</option>
+                            )
+                          })}                                                         
+                        </select>                                                                 
+                    </td>
+                    <td >                  
+                    {task.action.map((item2, i)=>{
+                            return(
+                              <button  key={item2} onClick={()=>deleteRow(i)}>{item2}{i}</button>
+                            )
+                          })}                                     
+                    </td> 
+                   </tr>              
+               ) })}
+        </tbody>                       
+    </table>                              
+   </div>
+  );                       
+
+   }
+
+
+/*<td > 
+                    {task.action.map((item2, index)=>{ 
+                                                             
+                          return(                                                         
+                          <button key={index} >
+                            {item2}</button>                                                                                                    
+                            );                    
+                          })                           
+                        }                                                    
+                    </td>  */
+
+/*{ 
 
      const taskList=tasks.map((task, index)=>{
        return(
-         <div>
-           {task.map((item, i)=>{
-                  return <div></div>
-           })}
+            <div>
            <div>{task.nr}</div>
+           <div>{task.description}</div>
+           <div>
+           {task.status.map((item, i)=>
+           {
+            return (
+              <div>
+            <div>{item.label}</div>
+            <div>{item.id}</div>
+            </div>
+            )
+           })}
        
+       </div>
        </div>
       ) 
       

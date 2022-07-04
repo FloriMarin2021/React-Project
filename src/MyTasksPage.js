@@ -7,8 +7,7 @@ import TaskTable from './TaskTable';
 
 class MyTasksPage extends React.Component{ 
    constructor(props) {
-      super(props);
-     
+      super(props);     
   
       this.state = {
         tasks: [
@@ -46,29 +45,24 @@ class MyTasksPage extends React.Component{
         ]
       }
     
+    } 
+
+ deleteRow=(id)=>{ 
+     this.setstate({
+      tasks: this.state.tasks.filter((task)=>{
+        return task.id!==id
+      })
+     }) 
+       
     }
 
-/*
-   
-  handleDeleted(id) {
-    const [list, setList] = React.useState(myTasks); 
-    const newList=list.filter((item)=>item.id!==id);
-          setList(newList); 
-
-        return (
-           <List list={list} onRemove={handleDeleted}/>
-            );
-    }
-handleDeleted={this.handleDeleted}
-*/
-
-
+  
    render() {
    
        return (
         <div className='MyTasksPage'>
        
-           <TaskTable   tasks={this.state.tasks}/>  
+           <TaskTable   tasks={this.state.tasks} deleteRow={this.deleteRow} />  
            <NavigationMeniu />
            <Header />
            <TaskForm/>
