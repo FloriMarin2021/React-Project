@@ -47,27 +47,31 @@ class MyTasksPage extends React.Component{
     
     } 
 
- deleteRow=(id)=>{ 
-     this.setstate({
-      tasks: this.state.tasks.filter((task)=>{
-        return task.id!==id
-      })
-     }) 
-       
-    }
+ //delete row cu splice
+    deleteRow=(idx)=>{ 
+      this.state.tasks.splice(idx, 1)
+      this.setState({tasks: this.state.tasks})        
+     }
 
+//delete row cu filter
+     /*
+ deleteRow=(idx)=>{ 
+     this.setState({
+      tasks: this.state.tasks.filter((task, index)=>{
+        return index!==idx;
+      })
+     })       
+    }
+    */
   
    render() {
    
        return (
-        <div className='MyTasksPage'>
-       
+        <div className='MyTasksPage'>       
            <TaskTable   tasks={this.state.tasks} deleteRow={this.deleteRow} />  
            <NavigationMeniu />
            <Header />
-           <TaskForm/>
-            
-                          
+           <TaskForm/>                         
         </div>   
        );
    }
