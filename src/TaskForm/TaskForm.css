@@ -1,9 +1,7 @@
 .task-form {
     display: flex;
     align-content: center;
-    border: 2px solid black;
-    width: 500px;
-    height: 600px;
+    border: 2px solid black;   
     margin-top: 40px;
     margin-left: 20px;
 }

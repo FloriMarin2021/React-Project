@@ -1,41 +1,32 @@
 
-.MyTasksPage {
+.my-task-page {
     display: grid;
     grid-template-areas:
     'sidebar header header '
-    'sidebar main  right'
-    'sidebar menu form';    
-    grid-template-rows: 30px 200px 450px;
-    grid-template-columns: 80px 850px auto;
-    overflow: hidden; 
-    gap:0.2em;
-    grid-template-columns:repeat(auto-fit, minmax(300px));
-   
+    'sidebar main  main'
+    'sidebar main main';  
+    overflow: hidden;     
+    grid-template-columns: 150px  auto;
+    grid-template-rows: 100px auto;
+    gap:0.2em;  
      }
 
-.item1 { grid-area: sidebar;
-      
-         }
-        
-        
-.item2 { grid-area: header;
-   
+.navigation-menu {
+   grid-area: sidebar;
+   height: 800px;      
+         }         
+         
+.header { 
+  grid-area: header;   
    }
 
-
-.item3 { grid-area: main;
+.task-table { 
+  grid-area: main;
      }
 
 
-.item4 { grid-area: right; 
-  }
 
 
-.item5 { grid-area: menu;
-    }
-
-.item6 { grid-area: form;
-    }
 
 
     

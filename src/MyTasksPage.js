@@ -1,8 +1,9 @@
 import React from 'react';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import Header from './Header/Header';
-import TaskForm from './TaskForm/TaskForm';
-import TaskTable from './TaskTable';
+//import TaskForm from './TaskForm/TaskForm';
+import TaskTable from './TaskTable/TaskTable';
+import './MyTasksPage.css';
 
 
 class MyTasksPage extends React.Component{ 
@@ -19,7 +20,7 @@ class MyTasksPage extends React.Component{
                       { id: 'in progress', label:'in progress'},
                       {  id: 'done', label:'done' }
                     ],
-             action: ['o', 'e', 'd']
+             notes: 'notite'
            },     
            {
              nr: '2',
@@ -29,7 +30,7 @@ class MyTasksPage extends React.Component{
                       { id: 'inprogress', label:'inprogress'},
                       {  id: 'done', label:'done' }
                     ],
-             action: ['o', 'e', 'd']
+             notes: 'notite'
            },    
            {
             nr: '3',
@@ -39,7 +40,7 @@ class MyTasksPage extends React.Component{
                       { id: 'in progress', label:'in progress'},
                       {  id: 'done', label:'done' }
                     ],
-             action: ['o', 'e', 'd']
+             notes: 'notite'
            }
                  
         ]
@@ -47,31 +48,22 @@ class MyTasksPage extends React.Component{
     
     } 
 
- //delete row cu splice
-    deleteRow=(idx)=>{ 
-      this.state.tasks.splice(idx, 1)
-      this.setState({tasks: this.state.tasks})        
-     }
-
-//delete row cu filter
-     /*
+    
  deleteRow=(idx)=>{ 
      this.setState({
       tasks: this.state.tasks.filter((task, index)=>{
         return index!==idx;
       })
      })       
-    }
-    */
+    } 
   
    render() {
    
        return (
-        <div className='MyTasksPage'>       
-           <TaskTable   tasks={this.state.tasks} deleteRow={this.deleteRow} />  
-           <NavigationMeniu />
-           <Header />
-           <TaskForm/>                         
+        <div className='my-task-page'>
+          <NavigationMeniu className='navigation-menu' />
+          <Header className='header'/>       
+          <TaskTable className='task-table'  tasks={this.state.tasks} deleteRow={this.deleteRow} />                          
         </div>   
        );
    }
