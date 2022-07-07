@@ -3,11 +3,10 @@ import React from 'react';
 import './TaskTable.css';
 
 
-function TaskTable({tasks, deleteRow}){ 
-  
-  return(
-    <div className='task-table'>      
-     <table className='task-table_table'>
+function TaskTable({tasks, deleteRow,  showModal}){ 
+  return(   
+    <div className='task-table'>          
+      <table className='task-table_table'>
         <thead  >
             <tr className='task-table_table_title'>
                 <th className='task-table_table_title_id'>Id</th>
@@ -35,20 +34,27 @@ function TaskTable({tasks, deleteRow}){
                     </td>
                     <td className='task-table_table_content_actions'>  
                       <button
-                           className='task-table_table_content_actions_btn_o'>O</button>
+                           onClick={e => {showModal(e);}}                          
+                           className='task-table_table_content_actions_btn_o'> 
+                           O
+                      </button>
                       <button
                            className='task-table_table_content_actions_btn_e' >E</button>                
                       <button
                            className='task-table_table_content_actions_btn_d'
+                          
                            onClick={()=>deleteRow(index)}>D</button>                                                            
                     </td>                    
                    </tr>              
                ) })}
         </tbody>                       
-    </table>                              
-   </div>
-  );                       
+    </table> 
 
+   </div>
+   
+  
+  );                       
+ 
    }
 
 

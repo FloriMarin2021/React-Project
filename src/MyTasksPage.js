@@ -5,6 +5,9 @@ import Header from './Header/Header';
 import TaskTable from './TaskTable/TaskTable';
 import './MyTasksPage.css';
 
+import Modal from './Modal/Modal';
+
+
 
 class MyTasksPage extends React.Component{ 
    constructor(props) {
@@ -20,7 +23,7 @@ class MyTasksPage extends React.Component{
                       { id: 'in progress', label:'in progress'},
                       {  id: 'done', label:'done' }
                     ],
-             notes: 'notite'
+             notes: 'notite 1'
            },     
            {
              nr: '2',
@@ -30,7 +33,7 @@ class MyTasksPage extends React.Component{
                       { id: 'inprogress', label:'inprogress'},
                       {  id: 'done', label:'done' }
                     ],
-             notes: 'notite'
+             notes: 'notite 2'
            },    
            {
             nr: '3',
@@ -40,31 +43,68 @@ class MyTasksPage extends React.Component{
                       { id: 'in progress', label:'in progress'},
                       {  id: 'done', label:'done' }
                     ],
-             notes: 'notite'
+             notes: 'notite 3'
            }
                  
-        ]
+        ] ,
+        isModalVisible: false, 
+        
+        openedTask:""
       }
     
     } 
+showModal = e => {
+      this.setState({
+        isModalVisible: !this.state.isModalVisible
+      });
+    };
 
-    
+showInfo =(index) => { 
+  this.setState({
+   openedTask: this.state.tasks.map((row, index)=>{
+      return ({
+       task: row.nr,
+       description:row.description,
+       date:row.date,
+       status: row.status,
+       notes: row.notes
+    })})
+
+  })       
+ }  
+
+
+
+      
+     
+  
+         
  deleteRow=(idx)=>{ 
      this.setState({
       tasks: this.state.tasks.filter((task, index)=>{
         return index!==idx;
       })
      })       
-    } 
-  
+    }  
+
    render() {
    
-       return (
+       return (        
         <div className='my-task-page'>
           <NavigationMeniu className='navigation-menu' />
           <Header className='header'/>       
-          <TaskTable className='task-table'  tasks={this.state.tasks} deleteRow={this.deleteRow} />                          
-        </div>   
+          <TaskTable className='task-table' 
+                     tasks={this.state.tasks} 
+                     deleteRow={this.deleteRow} 
+                     showModal={this.showModal}
+                     isModalVisible={this.state.isModalVisible}
+                     onClose={this.showModal}
+                     showInfo={this.showInfo}
+             />
+          <Modal onClose={this.showModal}
+           isModalVisible={this.state.isModalVisible} 
+            showInfo={this.showInfo}                  />                    
+        </div>           
        );
    }
 }

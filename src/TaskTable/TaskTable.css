@@ -1,7 +1,16 @@
 .task-table{
     display:flex;
     border: 2px solid black;
+    flex-direction: column;
 }
+
+.modal-show {
+    text-align:start;
+    font-size: 30px;
+    margin-left: 500px; 
+    margin-top: 50px;   
+}
+
 
 .task-table_table{
     display: flex;
@@ -36,9 +45,6 @@
     width: 150px;
 }
 
-.task-table_table_body{
-    border: 1px solid black;
-}
 
 .task-table_table_content_nr{
     width: 20px;
