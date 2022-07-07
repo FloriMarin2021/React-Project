@@ -53,33 +53,15 @@ class MyTasksPage extends React.Component{
       }
     
     } 
-showModal = e => {
+
+showModal = (task)=> {
       this.setState({
-        isModalVisible: !this.state.isModalVisible
+        isModalVisible: !this.state.isModalVisible,
+        openedTask: task,
       });
-    };
-
-showInfo =(index) => { 
-  this.setState({
-   openedTask: this.state.tasks.map((row, index)=>{
-      return ({
-       task: row.nr,
-       description:row.description,
-       date:row.date,
-       status: row.status,
-       notes: row.notes
-    })})
-
-  })       
- }  
-
-
-
-      
-     
-  
+    };  
          
- deleteRow=(idx)=>{ 
+deleteRow=(idx)=>{ 
      this.setState({
       tasks: this.state.tasks.filter((task, index)=>{
         return index!==idx;
@@ -99,11 +81,12 @@ showInfo =(index) => {
                      showModal={this.showModal}
                      isModalVisible={this.state.isModalVisible}
                      onClose={this.showModal}
-                     showInfo={this.showInfo}
-             />
-          <Modal onClose={this.showModal}
-           isModalVisible={this.state.isModalVisible} 
-            showInfo={this.showInfo}                  />                    
+                     openedTask={this.state.openedTask} />
+          <Modal 
+           openedTask={this.state.openedTask}
+           onClose={this.showModal}           
+           isModalVisible={this.state.isModalVisible} />
+                                             
         </div>           
        );
    }

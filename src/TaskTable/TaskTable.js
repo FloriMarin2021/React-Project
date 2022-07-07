@@ -4,10 +4,11 @@ import './TaskTable.css';
 
 
 function TaskTable({tasks, deleteRow,  showModal}){ 
-  return(   
-    <div className='task-table'>          
+  return( 
+    <div className='modal' >  
+     <div className='task-table'>          
       <table className='task-table_table'>
-        <thead  >
+        <thead>
             <tr className='task-table_table_title'>
                 <th className='task-table_table_title_id'>Id</th>
                 <th className='task-table_table_title_descr'>Description</th>
@@ -34,10 +35,9 @@ function TaskTable({tasks, deleteRow,  showModal}){
                     </td>
                     <td className='task-table_table_content_actions'>  
                       <button
-                           onClick={e => {showModal(e);}}                          
-                           className='task-table_table_content_actions_btn_o'> 
-                           O
-                      </button>
+                           onClick={()=> {showModal(task);}}                                                    
+                           className='task-table_table_content_actions_btn_o'>                            
+                      O</button>
                       <button
                            className='task-table_table_content_actions_btn_e' >E</button>                
                       <button
@@ -48,14 +48,10 @@ function TaskTable({tasks, deleteRow,  showModal}){
                    </tr>              
                ) })}
         </tbody>                       
-    </table> 
-
+    </table>
    </div>
-   
-  
-  );                       
- 
-   }
-
+   </div> 
+  );
+ }
 
 export default TaskTable;
