@@ -1,19 +1,16 @@
 import React from 'react';
 //import MyTaskPage  from './MyTasksPage';
-import './TaskTable.css';   
-
-
-
-function TaskTable({tasks, newRows, deleteRow, 
-      showModal, handleChange, addRow, showRow, displayForm, hideComponent, hideTabel}){ 
+import './TaskTable.css'; 
  
+
+
+
+function TaskTable({tasks, deleteRow, showModal, showRow, displayForm}){  
   
   return(  
-  <div>
-    <button  className='btn-hide' onClick={() => hideComponent(hideTabel)} >X</button> 
-
-       {hideTabel ? (
-        
+  <div>   
+       <button className='create-form'
+        onClick={() => showRow(!displayForm)} >Create new</button>    
     <div className='modal' >    
      <div className='task-table'>             
       <table className='task-table_table'>
@@ -47,59 +44,8 @@ function TaskTable({tasks, newRows, deleteRow,
                       <button
                            onClick={()=> {showModal(task);}}                                                    
                            className='task-table_table_content_actions_btn_o'>                            
-                      O</button> 
-                      {displayForm ? (
-             <div>
-                     <input 
-                       className='input_nr'
-                       type="text"
-                       name='nr'
-                       value={newRows.nr}                 
-                       onChange={handleChange}  
-                       /> 
-                    <input 
-                       className='task-table_table_content_descr'
-                       type="text"
-                       name='description'
-                       value={newRows.description}               
-                       onChange={handleChange}  
-                     />  
-                     <input 
-                       className='task-table_table_content_date' 
-                       type='text '
-                       name='date'
-                       value={newRows.date}                  
-                       onChange={handleChange}  
-                        />                                                                              
-                     <input
-                        className='task-table_table_content_status'
-                        type='text'
-                        name='status'
-                        value={newRows.status}
-                        onChange={handleChange}                    
-                        /> 
-                    <input
-                        className='task-table_table_content_status'
-                        type='text'
-                        name='action'
-                        value={newRows.action}
-                        onChange={handleChange}                        
-                        />                                                                                         
-                   <button
-                      type='submit'
-                      onClick={addRow}
-                      disabled={
-             !newRows.nr || !newRows.description ||!newRows.date ||!newRows.status||!newRows.action
-                                     }                  
-                    >create row</button>         
-        </div>
-         ) : (
-                      <button                       
-                             className='task-table_table_content_actions_btn_e' 
-                             onClick={() => showRow(!displayForm)}  >
-                             Edit</button>                  
-                         )}                 
-                           
+                      O</button>                       
+                     <button className='task-table_table_content_actions_btn_e' > Edit</button>                    
                       <button
                            className='task-table_table_content_actions_btn_d'                          
                            onClick={()=>deleteRow(index)}>D</button>                                                            
@@ -107,62 +53,9 @@ function TaskTable({tasks, newRows, deleteRow,
                    </tr>                              
               )  })}        
           </tbody> 
-     </table> 
-     {displayForm ? (
-             <div>
-                     <input 
-                       className='input_nr'
-                       type="text"
-                       name='nr'
-                       value={newRows.nr}                 
-                       onChange={handleChange}                        
-                       /> 
-                     <input 
-                       className='task-table_table_content_descr'
-                       type="text"
-                       name='description'
-                       value={newRows.description}               
-                       onChange={handleChange} 
-                       />  
-                     <input 
-                       className='task-table_table_content_date' 
-                       type='text '
-                       name='date'
-                       value={newRows.date}                  
-                       onChange={handleChange} 
-                        />                                                                              
-                     <input
-                        className='task-table_table_content_status'
-                        type='text'
-                        name='status'
-                        value={newRows.status}
-                        onChange={handleChange}                      
-                        /> 
-                    <input
-                        className='task-table_table_content_status'
-                        type='text'
-                        name='action'
-                        value={newRows.action}
-                        onChange={handleChange}                       
-                        />                                                                                         
-                   <button
-                      type='submit'
-                      onClick={addRow} 
-                       disabled={
-     !newRows.nr ||!newRows.description||!newRows.date||!newRows.status||!newRows.action
-                    }                                   
-                    >Add </button>         
-        </div>
-         ) : (
-          <button onClick={() => showRow(!displayForm)} className="addRow">
-            Add Row 
-          </button>
-        )}
+       </table>     
      </div>     
    </div>
-) : (
-         <div></div>
-)}
   </div>
   );    
  }

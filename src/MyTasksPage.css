@@ -3,8 +3,8 @@
     display: grid;
     grid-template-areas:
     'sidebar header header '
-    'sidebar main  main'
-    'sidebar main main';  
+    'sidebar main  main-end'
+    'sidebar main main-end';  
     overflow: hidden;     
     grid-template-columns: 150px  auto;
     grid-template-rows: 100px auto;
@@ -23,6 +23,10 @@
 .task-table { 
   grid-area: main;
      }
+
+.task-form {
+   grid-area:main-end;
+}
 
 
 
