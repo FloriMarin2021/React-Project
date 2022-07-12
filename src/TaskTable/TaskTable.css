@@ -82,7 +82,19 @@
     width: 500px;
      }
 
+.task-table_table_body_content-add{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    }
 
+.input_nr {
+    width: 20px;
+}
+
+.btn-hide{
+    margin-left: 470px;
+}
 
 
 

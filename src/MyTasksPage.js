@@ -4,15 +4,11 @@ import Header from './Header/Header';
 //import TaskForm from './TaskForm/TaskForm';
 import TaskTable from './TaskTable/TaskTable';
 import './MyTasksPage.css';
-
 import Modal from './Modal/Modal';
-
-
 
 class MyTasksPage extends React.Component{ 
    constructor(props) {
-      super(props);     
-  
+      super(props); 
       this.state = {
         tasks: [
          {
@@ -47,19 +43,74 @@ class MyTasksPage extends React.Component{
            }
                  
         ] ,
+
         isModalVisible: false, 
         
-        openedTask:""
-      }
-    
-    } 
+        openedTask:"",
 
+        newRows:{           
+          nr:'',        
+          description:'',
+          date:'',
+          status:'' ,
+          action:'',
+            },
+
+        displayForm: false,
+
+        hideTabel:true,
+            
+        }   
+    }
+
+hideComponent= ()=> {
+      this.setState({
+        hideTabel: this.hideTabel       
+             });
+    }; 
+
+showRow= ()=> {
+      this.setState({
+        displayForm: !this.displayForm        
+             });
+    };
+ 
+addRow = () => {
+
+  this.setState(({ newRows, tasks }) => {
+    return {
+      tasks: [...tasks, { ...newRows, id: tasks.length + 1 }],
+      newRows: {           
+        nr:'',        
+        description:'',
+        date:'',
+        status:'' ,
+        action:'',
+          }         
+    }   
+  })     
+    }; 
+  
+
+handleChange= (event) => { 
+ 
+     const fieldName = event.target.getAttribute("name");
+     const fieldValue = event.target.value;     
+     const newRows={...this.newRows}
+     newRows[fieldName] = fieldValue; 
+
+         this.setState(
+          { newRows: { ...newRows, 
+           [fieldName]:fieldValue}})      
+  } 
+  
 showModal = (task)=> {
       this.setState({
         isModalVisible: !this.state.isModalVisible,
         openedTask: task,
-      });
+             });
     };  
+ 
          
 deleteRow=(idx)=>{ 
      this.setState({
@@ -73,6 +124,7 @@ deleteRow=(idx)=>{
    
        return (        
         <div className='my-task-page'>
+       
           <NavigationMeniu className='navigation-menu' />
           <Header className='header'/>       
           <TaskTable className='task-table' 
@@ -81,7 +133,15 @@ deleteRow=(idx)=>{
                      showModal={this.showModal}
                      isModalVisible={this.state.isModalVisible}
                      onClose={this.showModal}
-                     openedTask={this.state.openedTask} />
+                     openedTask={this.state.openedTask}                    
+                     newRows={this.state.newRows}
+                     addRow={this.addRow}
+                     handleChange={this.handleChange} 
+                     displayForm={this.state.displayForm}
+                     showRow={this.showRow} 
+                     hideTabel={this.state.hideTabel}     
+                     hideComponent={this.hideComponent}              
+                     />
           <Modal 
            openedTask={this.state.openedTask}
            onClose={this.showModal}           
