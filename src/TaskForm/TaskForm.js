@@ -14,28 +14,28 @@ function TaskForm({ displayForm, hideComponent, hideForm, newRows, addRow,  hand
                <h1 className='task-form_forms_header'>FORM</h1>               
                <div className="task-form_forms_describe"> Description:       
                    <input type="text"  className="task-form_forms_describe_btn"                   
-                                  name='description'
-                                  value={newRows.description}                 
-                                  onChange={handleChange}  
-                                          />
+                                name='description'
+                                value={newRows.description}                 
+                                onChange={handleChange}  /> 
+                                         
                </div>
                <div className="task-form_forms_date"> Date:       
                    <input type="text"  className="task-form_forms_date_btn"
-                       name='date'
-                       value={newRows.date}
-                       onChange={handleChange}  />
+                                name='date'
+                                value={newRows.date}
+                                onChange={handleChange}  />
                </div>
                <div className="task-form_forms_notes"> Notes:       
                    <input type="text"  className="task-form_forms_notes_btn"
-                       name='notes'
-                       value={newRows.notes}
-                       onChange={handleChange}                       
-                       />
+                                name='notes'
+                                value={newRows.notes}
+                                onChange={handleChange}  />                      
                </div>
                <div className='task-form_forms_add'>           
                    <button  className="task-form_forms_add_btn"
                        type='submit'                   
-                       onClick={addRow}                                                         
+                       onClick={addRow} 
+                       disabled={!newRows.description||!newRows.date||!newRows.notes}                                                        
                    > Add Task</button>
                </div>
             </form>
@@ -47,10 +47,8 @@ function TaskForm({ displayForm, hideComponent, hideForm, newRows, addRow,  hand
    ) : (
           <div></div>          
        )}   
-        </div>
-         
-        ); 
-            
+        </div>         
+        );             
 }
 
 export default TaskForm

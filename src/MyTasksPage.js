@@ -13,7 +13,7 @@ class MyTasksPage extends React.Component{
       this.state = {
         tasks: [
          {
-             nr: '1',
+             nr: 1,
              description:'task nr 1',
              date:'22.12.2022',
              status:[ { id: 'open', label:'open' },
@@ -23,7 +23,7 @@ class MyTasksPage extends React.Component{
              notes: 'notite 1'
            },     
            {
-             nr: '2',
+             nr: 2,
              description:'task nr 2',
              date:'10.05.2021',
              status:[ { id:'open', label:'open' },
@@ -33,7 +33,7 @@ class MyTasksPage extends React.Component{
              notes: 'notite 2'
            },    
            {
-            nr: '3',
+            nr: 3,
              description:'task nr 3',
              date:'14.03.2020',
              status:[ { id: 'open', label:'open' },
@@ -57,7 +57,7 @@ class MyTasksPage extends React.Component{
           notes:''
                    },
 
-        displayForm: true,
+        displayForm: false,
         hideForm:true,            
         }   
     }
@@ -74,7 +74,8 @@ showRow= ()=> {
              });
     };
  
-addRow = () => {
+addRow= (event) => {
+  event.preventDefault();
   
   this.setState(({ newRows, tasks }) => {
     console.log("new rows", newRows);
@@ -85,11 +86,11 @@ addRow = () => {
         { id: 'in progress', label:'in progress'},
         {  id: 'done', label:'done' }
       ],
-       id: tasks.length+1
+       nr: tasks.length+1
        }],
       newRows: {
           nr:'',                 
-          description:newRows.description,
+          description:'',
           date:'',
           status:'',
           notes:''
@@ -100,14 +101,11 @@ addRow = () => {
     }; 
   
 
-handleChange= (event) => { 
-  event.preventDefault();
- 
+handleChange= (event) => {    
      const fieldName = event.target.getAttribute("name");
      const fieldValue = event.target.value;     
      const newRows={...this.state.newRows}
      newRows[fieldName] = fieldValue; 
-
          this.setState(
           { newRows: { ...newRows, 
            [fieldName]:fieldValue}})      
@@ -119,7 +117,6 @@ showModal = (task)=> {
         openedTask: task,
              });
     };  
- 
          
 deleteRow=(idx)=>{ 
      this.setState({
