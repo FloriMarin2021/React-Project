@@ -49,13 +49,15 @@ class MyTasksPage extends React.Component{
         
         openedTask:"",
 
-        newRows:{                  
+        newRows:{ 
+          nr:'',                 
           description:'',
           date:'',
+          status:'',
           notes:''
                    },
 
-        displayForm: false,
+        displayForm: true,
         hideForm:true,            
         }   
     }
@@ -75,13 +77,22 @@ showRow= ()=> {
 addRow = () => {
   
   this.setState(({ newRows, tasks }) => {
+    console.log("new rows", newRows);
     return {
-      tasks: [...tasks, { ...newRows }],
+      tasks: [...tasks, { 
+        ...newRows,
+        status: [ { id: 'open', label:'open' },
+        { id: 'in progress', label:'in progress'},
+        {  id: 'done', label:'done' }
+      ],
+       id: tasks.length+1
+       }],
       newRows: {
-        nr:'',           
-        description:'',
-        date:'',
-        notes:''
+          nr:'',                 
+          description:newRows.description,
+          date:'',
+          status:'',
+          notes:''
           }         
     }   
   })
@@ -90,6 +101,7 @@ addRow = () => {
   
 
 handleChange= (event) => { 
+  event.preventDefault();
  
      const fieldName = event.target.getAttribute("name");
      const fieldValue = event.target.value;     
