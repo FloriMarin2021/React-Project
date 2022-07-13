@@ -3,17 +3,17 @@
     display: grid;
     grid-template-areas:
     'sidebar header header '
-    'sidebar main  main-end'
+    'sidebar main-start main-center'
     'sidebar main main-end';  
     overflow: hidden;     
-    grid-template-columns: 150px  auto;
+    grid-template-columns: 150px auto;
     grid-template-rows: 100px auto;
     gap:0.2em;  
      }
 
 .navigation-menu {
    grid-area: sidebar;
-   height: 800px;      
+   height: 700px;      
          }         
          
 .header { 
@@ -22,13 +22,39 @@
 
 .task-table { 
   grid-area: main;
+  height: 450px;
+  width: 700px;
      }
 
 .task-form {
    grid-area:main-end;
+   height: 450px;
+   width: 500px;
+}
+
+.create-new {
+  grid-area: main-start;
+  display: flex;
+  height: 130px;
+  margin-top: 2px;
+  margin-right: 3px;
+  width: 700px;
+}
+
+.modal {
+   grid-area:main-center;
+   border:solid 2px black;
+   width: 500px;
+   height: 130px;
+   display: flex;
+   flex-direction: row;
 }
 
 
-
-
+.create-btn{
+   border: 2px solid black;
+   height: 50px;
+   margin-top: 80px;
+   width: 150px;
+}
     

@@ -57,22 +57,16 @@ class MyTasksPage extends React.Component{
           notes:''
                    },
 
-        displayForm: false,
         hideForm:true,            
-        }   
+        } 
+        
     }
 
-hideComponent= ()=> {
+handleClick= ()=> {
       this.setState({
-        hideForm: this.hideForm      
+        hideForm: !this.state.hideForm      
              });
     }; 
-
-showRow= ()=> {
-      this.setState({
-        displayForm: !this.displayForm        
-             });
-    };
  
 addRow= (event) => {
   event.preventDefault();
@@ -98,8 +92,7 @@ addRow= (event) => {
     }   
   })
   
-    }; 
-  
+    };  
 
 handleChange= (event) => {    
      const fieldName = event.target.getAttribute("name");
@@ -126,11 +119,14 @@ deleteRow=(idx)=>{
      })       
     }  
 
-   render() {
-   
-       return (        
-        <div className='my-task-page'>
-       
+   render() {   
+       return (              
+        <div className='my-task-page'> 
+               <div   className='create-new'>              
+                <button className='create-btn'  onClick={this.handleClick}>             
+                  Create new
+                </button>                               
+                </div>                       
           <NavigationMeniu className='navigation-menu' />
           <Header className='header'/>       
           <TaskTable className='task-table' 
@@ -139,28 +135,23 @@ deleteRow=(idx)=>{
                      showModal={this.showModal}
                      isModalVisible={this.state.isModalVisible}
                      onClose={this.showModal}
-                     openedTask={this.state.openedTask}                    
-                     displayForm={this.state.displayForm}
-                     showRow={this.showRow}
+                     openedTask={this.state.openedTask}             
                      newRows={this.state.newRows}
-                     addRow={this.addRow}
-                     handleChange={this.handleChange}              
-                     />
-          <Modal 
-           openedTask={this.state.openedTask}
-           onClose={this.showModal}           
-           isModalVisible={this.state.isModalVisible} />
+                     addRow={this.addRow} />
 
+          <Modal     className='modal'
+                     openedTask={this.state.openedTask}
+                     onClose={this.showModal}           
+                     isModalVisible={this.state.isModalVisible} />
+                  
            <TaskForm className='task-form'
-                     hideForm={this.state.hideForm}     
-                     hideComponent={this.hideComponent} 
-                     displayForm={this.state.displayForm}
-                     showRow={this.showRow}
+                     hideForm={this.state.hideForm}               
                      newRows={this.state.newRows}
                      addRow={this.addRow}
                      handleChange={this.handleChange}
-                     tasks={this.state.tasks} />                                
-        </div>           
+                     tasks={this.state.tasks}
+                     /> 
+        </div>       
        );
    }
 }

@@ -1,9 +1,9 @@
 .task-form {
     display: flex;
     align-content: center;
-    border: 2px solid black;   
-    margin-top: 40px;
-    margin-left: 20px;
+    border: 2px solid black;    
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .task-form_forms_header {

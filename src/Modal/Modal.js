@@ -15,12 +15,11 @@ import "./Modal.css";
 
    
     return (
-        <div className="modal-design">
-        <h1 > Modal Window   </h1>
-        <button onClick={this.onClose}>
+        <div className='modal'>        
+        <button className="modal_btn" onClick={this.onClose}>
            close
           </button>
-        <ul >
+        <ul className='modal_content'>
           <li>Task: {this.props.openedTask.nr} </li>
           <li>Description: {this.props.openedTask.description}</li>
           <li>Date: {this.props.openedTask.date}</li>

@@ -1,20 +1,14 @@
 import React from 'react';
-//import MyTaskPage  from './MyTasksPage';
 import './TaskTable.css'; 
  
 
 
 
-function TaskTable({tasks, deleteRow, showModal, showRow, displayForm}){  
-  
+function TaskTable({tasks, deleteRow, showModal}){  
   return(  
-  <div>   
-       <button className='create-form'
-        onClick={() => showRow(!displayForm)} >Create new</button>    
-    <div className='modal' >    
-     <div className='task-table'>             
-      <table className='task-table_table'>
-        <thead>
+   <div className='task-table'>               
+       <table className='task-table_table'>
+         <thead>
             <tr className='task-table_table_title'>
                 <th className='task-table_table_title_id'>Id</th>
                 <th className='task-table_table_title_descr'>Description</th>
@@ -42,7 +36,7 @@ function TaskTable({tasks, deleteRow, showModal, showRow, displayForm}){
                     </td>
                     <td className='task-table_table_content_actions'>  
                       <button
-                           onClick={()=> {showModal(task);}}                                                    
+                           onClick={()=> {showModal(task)}}                                                    
                            className='task-table_table_content_actions_btn_o'>                            
                       O</button>                       
                      <button className='task-table_table_content_actions_btn_e' > Edit</button>                    
@@ -54,8 +48,6 @@ function TaskTable({tasks, deleteRow, showModal, showRow, displayForm}){
               )  })}        
           </tbody> 
        </table>     
-     </div>     
-   </div>
   </div>
   );    
  }
