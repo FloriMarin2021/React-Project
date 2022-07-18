@@ -7,13 +7,10 @@ import "./Modal.css";
     this.props.onClose && this.props.onClose();
   };
 
-  render() {
-    
+  render() {    
     if (!this.props.isModalVisible) {
       return null;
-    }
-
-   
+    }   
     return (
         <div className='modal'>        
         <button className="modal_btn" onClick={this.onClose}>
@@ -33,7 +30,7 @@ import "./Modal.css";
                         </li>            
           <li>Notes: {this.props.openedTask.notes}</li>
         </ul>       
-        <div >{this.props.showModal}</div>       
+        <div ></div>       
       </div>     
     );
   }

@@ -4,7 +4,8 @@ import './TaskTable.css';
 
 
 
-function TaskTable({tasks, deleteRow, showModal}){  
+function TaskTable({tasks, deleteRow, showModal, hideForm, handleClick}){
+   
   return(  
    <div className='task-table'>               
        <table className='task-table_table'>
@@ -21,7 +22,7 @@ function TaskTable({tasks, deleteRow, showModal}){
          > 
                     {tasks.map((task, index)=>{
               return (               
-                <tr key={task.index} className='task-table_table_body_content'>
+                <tr  key={'task'+index} className='task-table_table_body_content'>
                     <td className='task-table_table_content_nr'>{task.nr}</td>
                                        <td className='task-table_table_content_descr'>{task.description}</td>
                     <td className='task-table_table_content_date'>{task.date}</td>
@@ -39,7 +40,9 @@ function TaskTable({tasks, deleteRow, showModal}){
                            onClick={()=> {showModal(task)}}                                                    
                            className='task-table_table_content_actions_btn_o'>                            
                       O</button>                       
-                     <button className='task-table_table_content_actions_btn_e' > Edit</button>                    
+                     <button className='task-table_table_content_actions_btn_e'
+                       onClick={()=> {handleClick(task)}}  
+                        > Edit</button>                    
                       <button
                            className='task-table_table_content_actions_btn_d'                          
                            onClick={()=>deleteRow(index)}>D</button>                                                            

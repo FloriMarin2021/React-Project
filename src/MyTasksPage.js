@@ -45,10 +45,8 @@ class MyTasksPage extends React.Component{
                  
         ] ,
 
-        isModalVisible: false, 
-        
+        isModalVisible: false,         
         openedTask:"",
-
         newRows:{ 
           nr:'',                 
           description:'',
@@ -56,18 +54,52 @@ class MyTasksPage extends React.Component{
           status:'',
           notes:''
                    },
+        hideForm:true,         
+        }                
+    } 
 
-        hideForm:true,            
-        } 
-        
-    }
-
-handleClick= ()=> {
+handleClick= (task)=> { 
       this.setState({
-        hideForm: !this.state.hideForm      
-             });
-    }; 
- 
+        hideForm: !this.state.hideForm,
+        newRows:task     
+      }); 
+}
+
+handleAddChange= (event) => {    
+  const fieldName = event.target.getAttribute("name");
+  const fieldValue = event.target.value;     
+  const newRows={...this.state.newRows}
+//  const tasks=this.state.tasks
+//  tasks.map((item, index) =>(index===tasks[index]? {...item, [fieldName]:fieldValue}:item))
+  newRows[fieldName] = fieldValue; 
+      this.setState(
+       {
+        newRows:{...newRows,
+        [fieldName]:fieldValue}
+        })   
+} 
+
+addEditRow= (e) => {
+    e.preventDefault();
+    const tasks=this.state.tasks
+    const newRows=this.state.newRows
+    const index=tasks.findIndex(task => task.nr===newRows.nr);
+    tasks[index]=newRows;
+         this.setState((tasks) => {           
+              return tasks;      
+             })
+
+  //   tasks.map((item, index)=>{
+  //    console.log("index", index);      
+  //  })
+  //  console.log("new rows number", newRows.nr); 
+  //  console.log("tasks", tasks);
+  //  console.log("task22", tasks[newRows.nr-1])    
+  //  console.log("index2", index2)    
+  // const index = tasks.find(task => task.nr === newRows.nr);
+  //  console.log("index", index)     
+  };           
+   
 addRow= (event) => {
   event.preventDefault();
   
@@ -88,35 +120,25 @@ addRow= (event) => {
           date:'',
           status:'',
           notes:''
-          }         
+          }                
     }   
-  })
-  
-    };  
+  })  
+    }; 
 
-handleChange= (event) => {    
-     const fieldName = event.target.getAttribute("name");
-     const fieldValue = event.target.value;     
-     const newRows={...this.state.newRows}
-     newRows[fieldName] = fieldValue; 
-         this.setState(
-          { newRows: { ...newRows, 
-           [fieldName]:fieldValue}})      
-  } 
   
 showModal = (task)=> {
       this.setState({
         isModalVisible: !this.state.isModalVisible,
         openedTask: task,
              });
-    };  
+    }; 
          
-deleteRow=(idx)=>{ 
+deleteRow=(idx)=>{
      this.setState({
       tasks: this.state.tasks.filter((task, index)=>{
-        return index!==idx;
+        return index!==idx;       
       })
-     })       
+     })         
     }  
 
    render() {   
@@ -137,7 +159,8 @@ deleteRow=(idx)=>{
                      onClose={this.showModal}
                      openedTask={this.state.openedTask}             
                      newRows={this.state.newRows}
-                     addRow={this.addRow} />
+                     addRow={this.addRow}
+                     handleClick={this.handleClick} />
 
           <Modal     className='modal'
                      openedTask={this.state.openedTask}
@@ -148,13 +171,15 @@ deleteRow=(idx)=>{
                      hideForm={this.state.hideForm}               
                      newRows={this.state.newRows}
                      addRow={this.addRow}
-                     handleChange={this.handleChange}
-                     tasks={this.state.tasks}
+                     handleAddChange={this.handleAddChange}
+                     tasks={this.state.tasks}                                        
+                     addEditRow={this.addEditRow}           
                      /> 
-        </div>       
+         </div>       
        );
    }
 }
-
+  
+  
 
 export default MyTasksPage;
