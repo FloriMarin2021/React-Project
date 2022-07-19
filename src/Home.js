@@ -1,15 +1,12 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 
 
 function Home () {
-    return  <div>
-               <h2>home page</h2>
-                  <ul>
-                    <li><Link to="/help">Help</Link></li> 
-                    <li><Link to="/graph">Graph</Link></li>
-                    <li><Link to="/mytaskspage">My tasks</Link></li> 
-                  </ul>        
+    return  <div>  
+                   <h2>Home </h2>
+                   < NavigationMeniu/>                        
             </div>
 }
 export default Home;
