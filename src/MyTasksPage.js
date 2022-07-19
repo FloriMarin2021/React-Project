@@ -6,7 +6,6 @@ import TaskTable from './TaskTable/TaskTable';
 import './MyTasksPage.css';
 import Modal from './Modal/Modal';
 
-
 class MyTasksPage extends React.Component{ 
    constructor(props) {
       super(props); 
@@ -45,8 +44,10 @@ class MyTasksPage extends React.Component{
                  
         ] ,
 
-        isModalVisible: false,         
+        isModalVisible: false, 
+
         openedTask:"",
+
         newRows:{ 
           nr:'',                 
           description:'',
@@ -54,13 +55,14 @@ class MyTasksPage extends React.Component{
           status:'',
           notes:''
                    },
-        hideForm:true,         
+
+          isHideForm:true,         
         }                
     } 
 
 handleClick= (task)=> { 
       this.setState({
-        hideForm: !this.state.hideForm,
+        isHideForm: !this.state.isHideForm,
         newRows:task     
       }); 
 }
@@ -81,23 +83,36 @@ handleAddChange= (event) => {
 
 addEditRow= (e) => {
     e.preventDefault();
-    const tasks=this.state.tasks
-    const newRows=this.state.newRows
+
+    const newTasks=this.state.tasks.map((task=>{
+      if(task.nr===this.state.newRows.nr){
+        return this.state.newRows;
+      }
+      else {
+        return task;
+      }
+    }))
+
+    this.setState({tasks:newTasks})
+
+   /* const tasks=this.state.tasks
+   const newRows=this.state.newRows
     const index=tasks.findIndex(task => task.nr===newRows.nr);
-    tasks[index]=newRows;
+   tasks[index]=newRows;
          this.setState((tasks) => {           
               return tasks;      
              })
 
-  //   tasks.map((item, index)=>{
-  //    console.log("index", index);      
-  //  })
+    tasks.map((item, index)=>{
+     console.log("index", index);      
+    })
   //  console.log("new rows number", newRows.nr); 
   //  console.log("tasks", tasks);
   //  console.log("task22", tasks[newRows.nr-1])    
   //  console.log("index2", index2)    
   // const index = tasks.find(task => task.nr === newRows.nr);
-  //  console.log("index", index)     
+  //  console.log("index", index)
+  */     
   };           
    
 addRow= (event) => {
@@ -142,13 +157,16 @@ deleteRow=(idx)=>{
     }  
 
    render() {   
-       return (              
+       return ( 
+        
         <div className='my-task-page'> 
+         
                <div   className='create-new'>              
                 <button className='create-btn'  onClick={this.handleClick}>             
                   Create new
                 </button>                               
-                </div>                       
+                </div>        
+                        
           <NavigationMeniu className='navigation-menu' />
           <Header className='header'/>       
           <TaskTable className='task-table' 
@@ -168,14 +186,17 @@ deleteRow=(idx)=>{
                      isModalVisible={this.state.isModalVisible} />
                   
            <TaskForm className='task-form'
-                     hideForm={this.state.hideForm}               
+                     isHideForm={this.state.isHideForm}               
                      newRows={this.state.newRows}
                      addRow={this.addRow}
                      handleAddChange={this.handleAddChange}
                      tasks={this.state.tasks}                                        
-                     addEditRow={this.addEditRow}           
+                     addEditRow={this.addEditRow}
+                     handleClick={this.handleClick}           
                      /> 
-         </div>       
+          
+         </div> 
+            
        );
    }
 }

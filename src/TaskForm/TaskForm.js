@@ -1,16 +1,16 @@
 import './TaskForm.css';
 
 
-function TaskForm({ hideForm, newRows,  addEditRow, handleAddChange}){
+function TaskForm({ isHideForm, newRows,  addEditRow, handleClick, handleAddChange}){
     
-    if (hideForm) {
+    if (isHideForm) {
         return null;
      } 
 
     return (       
         <div className='task-form'>                      
              <form className="task-form_forms">
-                 <button  className='btn-hide' onClick={hideForm} >X</button>
+                 <button  className='btn-hide' onClick={handleClick} >X</button>
                 <h1  className='task-form_forms_header'>FORM</h1> 
              
                                       

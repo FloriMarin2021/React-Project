@@ -4,7 +4,7 @@ import './TaskTable.css';
 
 
 
-function TaskTable({tasks, deleteRow, showModal, hideForm, handleClick}){
+function TaskTable({tasks, deleteRow, showModal, handleClick}){
    
   return(  
    <div className='task-table'>               

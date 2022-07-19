@@ -1,17 +1,22 @@
 import './NavigationMeniu.css';
+import { Link } from "react-router-dom";
 
 
 const NavigationMeniu=()=>{
 
     return (
       <div className='navigation-menu'>            
-        <button className="navigation-menu_btn">Home</button> 
-        <button className="navigation-menu_btn">My tasks</button>          
-        <button className="navigation-menu_btn">Graph</button>           
-        <button className="navigation-menu_btn">Help</button>          
+        <button><Link to="/home">Home</Link></button>
+        <button> <Link to="/mytaskspage">My tasks</Link></button>          
+        <button><Link to="/graph">Graph</Link></button>           
+        <button><Link to="/help">Help</Link></button>         
       </div>
     );
 }
 
 
 export default NavigationMeniu
+    
+
+
+
