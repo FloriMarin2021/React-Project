@@ -15,30 +15,33 @@ class MyTasksPage extends React.Component{
              nr: 1,
              description:'task nr 1',
              date:'22.12.2022',
-             status:[ { id: 'open', label:'open' },
-                      { id: 'in progress', label:'in progress'},
+             status:[ { id: 'open', label:'Open' },
+                      { id: 'inProgress', label:'In Progress'},
                       {  id: 'done', label:'done' }
                     ],
-             notes: 'notite 1'
+            currentStatus:{ id:'open', label:'open' },             
+            notes: 'notite 1'
            },     
            {
              nr: 2,
              description:'task nr 2',
              date:'10.05.2021',
-             status:[ { id:'open', label:'open' },
-                      { id: 'in progress', label:'in progress'},
+             status:[ { id:'open', label:'Open' },
+                      { id: 'inProgress', label:'In Progress'},
                       {  id: 'done', label:'done' }
                     ],
+            currentStatus:{ id: 'open', label:'open' },
              notes: 'notite 2'
            },    
            {
             nr: 3,
              description:'task nr 3',
              date:'14.03.2020',
-             status:[ { id: 'open', label:'open' },
-                      { id: 'in progress', label:'in progress'},
+             status:[ { id: 'open', label:'Open' },
+                      { id: 'inProgress', label:'In Progress'},
                       {  id: 'done', label:'done' }
                     ],
+             currentStatus:{ id:'open', label:'open' },
              notes: 'notite 3'
            }
                  
@@ -56,12 +59,7 @@ class MyTasksPage extends React.Component{
           notes:''
                    },
 
-          isHideForm:true,
-
-          currentStatus:"",
-          countDone:0,
-          countProgress:0,
-          countOpen:0,
+          isHideForm:true,      
           styles:{
             color:"black",
             textDecoration:""
@@ -78,45 +76,20 @@ colorClick=()=>{
         }
       })
     }
-    
-addProgress=()=>{
-  this.setState({
-    countProgress:this.state.countProgress+1,
-    countOpen:this.state.countOpen-1
-  })
-}
-
-addDone=()=>{ 
-  this.setState({countDone:this.state.countDone+1,
-                countProgress:this.state.countProgress-1,
-                })
-}
-
-addOpen=()=>{
-  this.setState({      
-     countOpen: this.state.countOpen+1 
-    })
-}
-
 
 handleStatus= (event) => {
-   console.log("valoare event", event.target.value) 
-     if(event.target.value==='open'){
-        this.addOpen();
-       } 
-    else if(event.target.value==='done') {
-      this.addDone();
-      this.colorClick();
-      
-    }
-    else if(event.target.value==='in progress'){
-      this.addProgress();
-    } 
+ 
+   console.log("valoare target value", event.target.value) 
+   const fieldName = event.target.getAttribute("name");
+ /*
         this.setState(
        {       
-        currentStatus:event.target.value,
+        [fieldName]: event.target.value 
         } ) 
+        */
       }
+    
+
 
   
  
@@ -244,10 +217,10 @@ deleteRow=(idx)=>{
                <div   className='create-new'>
                   <div className='status'>
                    <div
-                   className='status_open'>Open: {this.state.countOpen}</div>                   
+                   className='status_open'>Open:</div>                   
                    <div 
-                    className='status_progress'>In progress:{this.state.countProgress} </div>
-                   <div className='status_done'>Done: {this.state.countDone}</div> 
+                    className='status_progress'>In progress:</div>
+                   <div className='status_done'>Done:</div> 
                   </div > 
                   <div className='create'>         
                      <button className='create-btn'  onClick={this.handleClick}>             
@@ -271,6 +244,7 @@ deleteRow=(idx)=>{
                      handleStatus={this.handleStatus}
                      styles={this.state.styles}
                      colorClick={this.colorClick}
+                     currentStatus={this.state.currentStatus}
                                  />
 
           <Modal     className='modal'

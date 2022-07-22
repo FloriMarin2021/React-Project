@@ -22,24 +22,32 @@ function TaskTable({tasks,styles, deleteRow, showModal, handleClick, handleStatu
                     {tasks.map((task, index)=>{
               return (               
                 <tr  key={'task'+index} className='task-table_table_body_content'>
-                    <td style={styles}  
+                    <td  style={styles}
                      className='task-table_table_content_nr'>{task.nr}</td>
                                        <td style={styles}
                                        className='task-table_table_content_descr'>{task.description}</td>
                     <td style={styles}
+
                     className='task-table_table_content_date'>{task.date}</td>
-                    <td className='task-table_table_content_status'>                                                            
-                    <select    onChange={handleStatus}                       
+                    <td className='task-table_table_content_status'> 
+                    <select 
+                       name='id'
+                       value={task.currentStatus.id} 
+                       onChange={handleStatus}                       
                                              >
-                                        <option>select option</option>                                                                      
-                          {task.status.map((item, i)=>{
-                            return(
-                              <option 
-                              index= {index}                            
-                              id={i} value={item.id}>{item.label}</option>
+                                
+                        {task.status.map((item, i)=>{                          
+                            return(                             
+                              <option                         
+                              key={i}
+                              index= {index}
+                              value={item.label}                            
+                              >{item.label}</option>
                             )
                           }) }                                                        
-                        </select>                                                                 
+                        </select>                                                       
+                                                                     
+                                                                                       
                     </td>
                     <td className='task-table_table_content_actions'>  
                       <button
