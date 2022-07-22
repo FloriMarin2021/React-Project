@@ -1,11 +1,11 @@
 import React from 'react';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
+import './Home.css'; 
 
 
 function Home () {
-    return  <div>  
-              <h2>home</h2>  
-                 < NavigationMeniu/>                        
+    return  <div className='home'>                 
+                < NavigationMeniu />                                           
             </div>
 }
 export default Home;

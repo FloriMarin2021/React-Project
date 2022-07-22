@@ -26,7 +26,7 @@ class MyTasksPage extends React.Component{
              description:'task nr 2',
              date:'10.05.2021',
              status:[ { id:'open', label:'open' },
-                      { id: 'inprogress', label:'inprogress'},
+                      { id: 'in progress', label:'in progress'},
                       {  id: 'done', label:'done' }
                     ],
              notes: 'notite 2'
@@ -56,10 +56,91 @@ class MyTasksPage extends React.Component{
           notes:''
                    },
 
-          isHideForm:true,         
-        }                
-    } 
+          isHideForm:true,
 
+          currentStatus:"",
+          countDone:0,
+          countProgress:0,
+          countOpen:0,
+          styles:{
+            color:"black",
+            textDecoration:""
+          }, 
+       
+             }                               
+    } 
+    
+colorClick=()=>{
+      this.setState({
+          styles:{
+            color:"green",
+            textDecoration:"line-through"
+        }
+      })
+    }
+    
+addProgress=()=>{
+  this.setState({
+    countProgress:this.state.countProgress+1,
+    countOpen:this.state.countOpen-1
+  })
+}
+
+addDone=()=>{ 
+  this.setState({countDone:this.state.countDone+1,
+                countProgress:this.state.countProgress-1,
+                })
+}
+
+addOpen=()=>{
+  this.setState({      
+     countOpen: this.state.countOpen+1 
+    })
+}
+
+
+handleStatus= (event) => {
+   console.log("valoare event", event.target.value) 
+     if(event.target.value==='open'){
+        this.addOpen();
+       } 
+    else if(event.target.value==='done') {
+      this.addDone();
+      this.colorClick();
+      
+    }
+    else if(event.target.value==='in progress'){
+      this.addProgress();
+    } 
+        this.setState(
+       {       
+        currentStatus:event.target.value,
+        } ) 
+      }
+
+  
+ 
+  
+    //  this.setState({tasks:newTasks})
+  
+     /* const tasks=this.state.tasks
+     const newRows=this.state.newRows
+      const index=tasks.findIndex(task => task.nr===newRows.nr);
+     tasks[index]=newRows;
+           this.setState((tasks) => {           
+                return tasks;      
+               })
+  
+      tasks.map((item, index)=>{
+       console.log("index", index);      
+      })
+    //  console.log("new rows number", newRows.nr); 
+    //  console.log("tasks", tasks);
+    //  console.log("task22", tasks[newRows.nr-1])    
+    //  console.log("index2", index2)    
+    // const index = tasks.find(task => task.nr === newRows.nr);
+    //  console.log("index", index)
+    */ 
 handleClick= (task)=> { 
       this.setState({
         isHideForm: !this.state.isHideForm,
@@ -71,9 +152,8 @@ handleAddChange= (event) => {
   const fieldName = event.target.getAttribute("name");
   const fieldValue = event.target.value;     
   const newRows={...this.state.newRows}
-//  const tasks=this.state.tasks
-//  tasks.map((item, index) =>(index===tasks[index]? {...item, [fieldName]:fieldValue}:item))
   newRows[fieldName] = fieldValue; 
+  console.log('curent status', newRows)
       this.setState(
        {
         newRows:{...newRows,
@@ -86,6 +166,7 @@ addEditRow= (e) => {
 
     const newTasks=this.state.tasks.map((task=>{
       if(task.nr===this.state.newRows.nr){
+        console.log("task nr", task.status)
         return this.state.newRows;
       }
       else {
@@ -139,7 +220,6 @@ addRow= (event) => {
     }   
   })  
     }; 
-
   
 showModal = (task)=> {
       this.setState({
@@ -159,12 +239,21 @@ deleteRow=(idx)=>{
    render() {   
        return ( 
         
-        <div className='my-task-page'> 
+          <div className='my-task-page'> 
          
-               <div   className='create-new'>              
-                <button className='create-btn'  onClick={this.handleClick}>             
-                  Create new
-                </button>                               
+               <div   className='create-new'>
+                  <div className='status'>
+                   <div
+                   className='status_open'>Open: {this.state.countOpen}</div>                   
+                   <div 
+                    className='status_progress'>In progress:{this.state.countProgress} </div>
+                   <div className='status_done'>Done: {this.state.countDone}</div> 
+                  </div > 
+                  <div className='create'>         
+                     <button className='create-btn'  onClick={this.handleClick}>             
+                      Create new
+                      </button> 
+                  </div>                               
                 </div>        
                         
           <NavigationMeniu className='navigation-menu' />
@@ -178,7 +267,11 @@ deleteRow=(idx)=>{
                      openedTask={this.state.openedTask}             
                      newRows={this.state.newRows}
                      addRow={this.addRow}
-                     handleClick={this.handleClick} />
+                     handleClick={this.handleClick}
+                     handleStatus={this.handleStatus}
+                     styles={this.state.styles}
+                     colorClick={this.colorClick}
+                                 />
 
           <Modal     className='modal'
                      openedTask={this.state.openedTask}

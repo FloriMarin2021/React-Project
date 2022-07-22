@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import './Graph.css'; 
+
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 
 
 function Graph () {
-    return <div>
-                 <h2>Graph text</h2> 
-                 <NavigationMeniu/>
-                    
+    return <div className='graph'>               
+                 <NavigationMeniu/>                    
           </div>
 }
 export default Graph;

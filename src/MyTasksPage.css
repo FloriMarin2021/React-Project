@@ -35,11 +35,13 @@
 .create-new {
   grid-area: main-start;
   display: flex;
+  flex-direction: column;
   height: 130px;
   margin-top: 2px;
   margin-right: 3px;
   width: 700px;
-}
+  margin-left: 3px;
+  }
 
 .modal {
    grid-area:main-center;
@@ -53,8 +55,26 @@
 
 .create-btn{
    border: 2px solid black;
-   height: 50px;
-   margin-top: 80px;
-   width: 150px;
+   height: 30px;
+   margin-top: 30px;
+   width: 120px;
+   margin-left: 2px;
 }
+
+.status_open{
+   font-size: large;
+}
+
+.status_progress{
+   font-size: large;
+   margin-top: 3px;
+}
+
+.status_done{
+   margin-top: 5px;
+   font-size: large;
+}
+
+
+
     

@@ -4,7 +4,7 @@ import './TaskTable.css';
 
 
 
-function TaskTable({tasks, deleteRow, showModal, handleClick}){
+function TaskTable({tasks,styles, deleteRow, showModal, handleClick, handleStatus}){
    
   return(  
    <div className='task-table'>               
@@ -18,19 +18,25 @@ function TaskTable({tasks, deleteRow, showModal, handleClick}){
                 <th className='task-table_table_title_action'>Action</th>
             </tr>
         </thead>           
-        <tbody className='task-table_table_body'
-         > 
+        <tbody className='task-table_table_body'         > 
                     {tasks.map((task, index)=>{
               return (               
                 <tr  key={'task'+index} className='task-table_table_body_content'>
-                    <td className='task-table_table_content_nr'>{task.nr}</td>
-                                       <td className='task-table_table_content_descr'>{task.description}</td>
-                    <td className='task-table_table_content_date'>{task.date}</td>
-                    <td className='task-table_table_content_status'>                                                           
-                        <select> 
-                          {task.status.map((item)=>{
+                    <td style={styles}  
+                     className='task-table_table_content_nr'>{task.nr}</td>
+                                       <td style={styles}
+                                       className='task-table_table_content_descr'>{task.description}</td>
+                    <td style={styles}
+                    className='task-table_table_content_date'>{task.date}</td>
+                    <td className='task-table_table_content_status'>                                                            
+                    <select    onChange={handleStatus}                       
+                                             >
+                                        <option>select option</option>                                                                      
+                          {task.status.map((item, i)=>{
                             return(
-                              <option>{item.label}</option>
+                              <option 
+                              index= {index}                            
+                              id={i} value={item.id}>{item.label}</option>
                             )
                           }) }                                                        
                         </select>                                                                 
