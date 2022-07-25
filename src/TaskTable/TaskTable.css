@@ -63,10 +63,17 @@
 
 
 .task-table_table_content_status{
-    width: 150px;
+    width: 130px;
     border: 1px solid black;
     text-align: center;
   
+}
+
+
+.task-table_table_content_priority{
+    width: 150px;
+    border: 1px solid black;
+    text-align: center;
 }
 
 .task-table_table_content_actions{

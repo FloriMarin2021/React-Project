@@ -20,7 +20,8 @@ class MyTasksPage extends React.Component{
                       {  id: 'done', label:'done' }
                     ],
             currentStatus:{ id:'open', label:'open' },             
-            notes: 'notite 1'
+            notes: 'notite 1',
+            priority:"minor"
            },     
            {
              nr: 2,
@@ -31,10 +32,11 @@ class MyTasksPage extends React.Component{
                       {  id: 'done', label:'done' }
                     ],
             currentStatus:{ id: 'open', label:'open' },
-             notes: 'notite 2'
+             notes: 'notite 2',
+             priority:"critical"
            },    
            {
-            nr: 3,
+             nr: 3,
              description:'task nr 3',
              date:'14.03.2020',
              status:[ { id: 'open', label:'Open' },
@@ -42,7 +44,8 @@ class MyTasksPage extends React.Component{
                       {  id: 'done', label:'done' }
                     ],
              currentStatus:{ id:'open', label:'open' },
-             notes: 'notite 3'
+             notes: 'notite 3',
+             priority:'major'
            }
                  
         ] ,
@@ -59,61 +62,32 @@ class MyTasksPage extends React.Component{
           notes:''
                    },
 
-          isHideForm:true,      
-          styles:{
-            color:"black",
-            textDecoration:""
-          }, 
-       
+          isHideForm:true,       
              }                               
     } 
-    
-colorClick=()=>{
-      this.setState({
-          styles:{
-            color:"green",
-            textDecoration:"line-through"
+
+
+handleStatus= (event, index) => {
+
+ const newStatus=this.state.tasks.map((task, idx)=>{ 
+   if(index===idx){   
+      if(event.target.value!==task.currentStatus.id){      
+          task.currentStatus.id=event.target.value                      
+          task.currentStatus.label=event.target.value
+            return {...this.state.tasks[index], currentStatus:task.currentStatus}
         }
-      })
-    }
+    else {
+        return this.state.tasks[index]
+      }      
+      }   
+   return task
+ })  
 
-handleStatus= (event) => {
- 
-   console.log("valoare target value", event.target.value) 
-   const fieldName = event.target.getAttribute("name");
- /*
-        this.setState(
-       {       
-        [fieldName]: event.target.value 
-        } ) 
-        */
-      }
-    
+   this.setState({...this.state.tasks,
+                   currentStatus:newStatus})
 
+}  
 
-  
- 
-  
-    //  this.setState({tasks:newTasks})
-  
-     /* const tasks=this.state.tasks
-     const newRows=this.state.newRows
-      const index=tasks.findIndex(task => task.nr===newRows.nr);
-     tasks[index]=newRows;
-           this.setState((tasks) => {           
-                return tasks;      
-               })
-  
-      tasks.map((item, index)=>{
-       console.log("index", index);      
-      })
-    //  console.log("new rows number", newRows.nr); 
-    //  console.log("tasks", tasks);
-    //  console.log("task22", tasks[newRows.nr-1])    
-    //  console.log("index2", index2)    
-    // const index = tasks.find(task => task.nr === newRows.nr);
-    //  console.log("index", index)
-    */ 
 handleClick= (task)=> { 
       this.setState({
         isHideForm: !this.state.isHideForm,
@@ -126,7 +100,7 @@ handleAddChange= (event) => {
   const fieldValue = event.target.value;     
   const newRows={...this.state.newRows}
   newRows[fieldName] = fieldValue; 
-  console.log('curent status', newRows)
+  console.log('new rows', newRows)
       this.setState(
        {
         newRows:{...newRows,
@@ -146,7 +120,7 @@ addEditRow= (e) => {
         return task;
       }
     }))
-
+console.log("new tasks", newTasks)
     this.setState({tasks:newTasks})
 
    /* const tasks=this.state.tasks
@@ -156,17 +130,8 @@ addEditRow= (e) => {
          this.setState((tasks) => {           
               return tasks;      
              })
-
-    tasks.map((item, index)=>{
-     console.log("index", index);      
-    })
-  //  console.log("new rows number", newRows.nr); 
-  //  console.log("tasks", tasks);
-  //  console.log("task22", tasks[newRows.nr-1])    
-  //  console.log("index2", index2)    
-  // const index = tasks.find(task => task.nr === newRows.nr);
-  //  console.log("index", index)
-  */     
+*/
+    
   };           
    
 addRow= (event) => {
@@ -209,18 +174,31 @@ deleteRow=(idx)=>{
      })         
     }  
 
-   render() {   
-       return ( 
-        
-          <div className='my-task-page'> 
-         
+   render() { 
+    const open=this.state.tasks.filter(task=>{      
+      return task.currentStatus.id==='open'        
+    })
+    const openStatus=open.length   
+
+    const progress=this.state.tasks.filter(task=>{      
+      return task.currentStatus.id==='inProgress'        
+    })
+    const progressStatus=progress.length   
+
+    const done=this.state.tasks.filter(task=>{      
+      return task.currentStatus.id==='done'        
+    })
+    const doneStatus=done.length  
+   
+       return (        
+          <div className='my-task-page'>         
                <div   className='create-new'>
                   <div className='status'>
                    <div
-                   className='status_open'>Open:</div>                   
+                   className='status_open'>Open:{openStatus}</div>                   
                    <div 
-                    className='status_progress'>In progress:</div>
-                   <div className='status_done'>Done:</div> 
+                    className='status_progress'>In progress:{progressStatus}</div>
+                   <div className='status_done'>Done:{doneStatus}</div> 
                   </div > 
                   <div className='create'>         
                      <button className='create-btn'  onClick={this.handleClick}>             
@@ -242,8 +220,6 @@ deleteRow=(idx)=>{
                      addRow={this.addRow}
                      handleClick={this.handleClick}
                      handleStatus={this.handleStatus}
-                     styles={this.state.styles}
-                     colorClick={this.colorClick}
                      currentStatus={this.state.currentStatus}
                                  />
 
