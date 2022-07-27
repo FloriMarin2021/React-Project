@@ -17,7 +17,7 @@ class Home extends React.Component {
     // ComponentDidMount is used to
     // execute the code 
     componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/users";
+        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
         fetch(baseURL)
             .then((res) => res.json())
             .then((json) => {
@@ -27,11 +27,11 @@ class Home extends React.Component {
                 });
             })
     }
-   */
+ */  
 
-    /*
+ /*   
     async componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/users";
+        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
         try {
           const response = await fetch(baseURL);
           const json = await response.json();
@@ -44,9 +44,9 @@ class Home extends React.Component {
         }
     } 
    */
-   
+  
     componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/users";
+        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
         axios.get(baseURL)
           .then(res => {
             const items = res.data;

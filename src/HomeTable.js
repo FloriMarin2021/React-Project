@@ -9,26 +9,18 @@ import Paper from '@material-ui/core/Paper';
 
 
 
-function HomeTable({items}) {
-  const useStyles=()=>{
-    return{
-      table: {      
-        width: 1350   
-      } 
-         }
-  }     
+function HomeTable({items}) {    
 
   return (
     <TableContainer component={Paper}>
-      <Table  style={{...useStyles()}} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-           <TableCell>Id</TableCell>
-            <TableCell align="right">Username</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Website</TableCell>
-            <TableCell align="right">Phone</TableCell>
+           <TableCell>UserId</TableCell>
+            <TableCell align="right">Id</TableCell>
+            <TableCell align="right">Title</TableCell>
+            <TableCell align="right">Body</TableCell>
+           
             
           </TableRow>
         </TableHead>
@@ -36,13 +28,11 @@ function HomeTable({items}) {
           {items.map((item) => (            
             <TableRow key={item.id}>
               <TableCell component="th" scope="row">
-                {item.id}
+                {item.userId}
               </TableCell>
-              <TableCell align="right">{item.name}</TableCell>
-              <TableCell align="right">{item.username}</TableCell>
-              <TableCell align="right">{item.email}</TableCell>
-              <TableCell align="right">{item.website}</TableCell>
-              <TableCell align="right">{item.phone}</TableCell>
+              <TableCell align="right">{item.id}</TableCell>
+              <TableCell align="right">{item.title}</TableCell>
+              <TableCell align="right">{item.body}</TableCell>
             </TableRow>
             
           ))}
