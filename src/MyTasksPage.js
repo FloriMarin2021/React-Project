@@ -68,7 +68,26 @@ class MyTasksPage extends React.Component{
 
 
 handleStatus= (event, index) => {
+const newCurrentStatusId=event.target.value
 
+const updatedTasks=this.state.tasks.map((task, idx)=>{
+if(index===idx){
+  const updatedTasks={
+    ...task, //o copie de task
+    currentStatus:{
+      id:newCurrentStatusId,
+      label: task.status.find((s)=>s.id===newCurrentStatusId).label
+    }
+  }
+  return updatedTasks;
+}
+else {
+  return task;
+}
+})
+this.setState({tasks:updatedTasks})
+}
+/*
  const newStatus=this.state.tasks.map((task, idx)=>{ 
    if(index===idx){   
       if(event.target.value!==task.currentStatus.id){      
@@ -85,8 +104,8 @@ handleStatus= (event, index) => {
 
    this.setState({...this.state.tasks,
                    currentStatus:newStatus})
+*/
 
-}  
 
 handleClick= (task)=> { 
       this.setState({

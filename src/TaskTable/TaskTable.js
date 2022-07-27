@@ -4,7 +4,16 @@ import './TaskTable.css';
 
 
 function TaskTable({tasks, deleteRow, showModal, handleClick, handleStatus}){
-   
+  const setStyle=(task)=>{
+    return{
+      textDecoration:(task.currentStatus.id==='done')?'line-through':'none',            
+                     color:(task.priority==='critical')?
+                      'red':task.priority==='major'?'orange':'gray',
+                      color:(task.currentStatus.id==='done')?
+                      'green':(task.priority==='critical')? 
+                      'red':task.priority==='major'?'orange':'gray'
+      }
+  } 
   return(  
    <div className='task-table'>               
        <table className='task-table_table'>
@@ -22,22 +31,13 @@ function TaskTable({tasks, deleteRow, showModal, handleClick, handleStatus}){
                     {tasks.map((task, index)=>{
               return (               
                 <tr  key={'task'+index} className='task-table_table_body_content'>
-                    <td   style={{ textDecoration:(task.currentStatus.id==='done')?'line-through':'none',            
-                          color:(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray',
-                          color:(task.currentStatus.id==='done')?'green':(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray'}} 
-
+                    <td   style={{...setStyle(task)}} 
                      className='task-table_table_content_nr'>{task.nr}</td>
-                                       <td style={{ textDecoration:(task.currentStatus.id==='done')?'line-through':'none',            
-                     color:(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray',
-                     color:(task.currentStatus.id==='done')?'green':(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray'}}
+                                       <td style={{...setStyle(task)}} 
                                        className='task-table_table_content_descr'>{task.description}</td>
-                   <td  style={{ textDecoration:(task.currentStatus.id==='done')?'line-through':'none',            
-                     color:(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray',
-                     color:(task.currentStatus.id==='done')?'green':(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray'}}
+                   <td style={{...setStyle(task)}} 
                     className='task-table_table_content_date'>{task.date}</td>
-                    <td style={{ textDecoration:(task.currentStatus.id==='done')?'line-through':'none',            
-                     color:(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray',
-                     color:(task.currentStatus.id==='done')?'green':(task.priority==='critical')? 'red':task.priority==='major'?'orange':'gray'}}
+                    <td style={{...setStyle(task)}} 
                     className='task-table_table_content_priority'>{task.priority}</td>
                     <td className='task-table_table_content_status'> 
                     <select                   

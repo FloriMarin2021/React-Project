@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './Home';
 import Help from './Help';
 import Graph from './Graph';
-import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
+//import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 /*
 //<Route index element={<Home />} />
 <Route path="mytaskspage" element={<MyTasksPage/>}/>
