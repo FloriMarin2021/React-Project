@@ -10,9 +10,21 @@ class Home extends React.Component {
    
         this.state = {
             items: [], 
-            isLoaded:false
+            isLoaded:false,
+            userId:'',
+            id:'',
+            title:'',
+            body:'',
+
+            isHideForm:true
         };
     }
+
+   appearForm= ()=> { 
+      this.setState({
+        isHideForm: !this.state.isHideForm,         
+      }); 
+}
   /*
     // ComponentDidMount is used to
     // execute the code 
@@ -45,7 +57,7 @@ class Home extends React.Component {
     } 
    */
   
-    componentDidMount() {
+componentDidMount() {
         const baseURL =  "https://jsonplaceholder.typicode.com/posts";
         axios.get(baseURL)
           .then(res => {
@@ -53,8 +65,31 @@ class Home extends React.Component {
             this.setState({ items});
           })
       }
+deleteRow=(idx)=>{
+        axios.delete(`https://jsonplaceholder.typicode.com/posts/${idx}`)  
+          .then(res => {  
+            console.log(res);  
+            console.log(res.data); 
+            const items = this.state.items.filter((item, index) => index!== idx);  
+            this.setState({items });            
+          })                  
+      }  
 
-
+      
+ /*     
+handleSubmit=(e)=> {
+        e.preventDefault()
+        const itemNew = {
+          userId:this.state.userId,
+          id:this.state.id,
+          title:this.state.title,
+          body:this.state.body
+      }
+      const baseURL =  "https://jsonplaceholder.typicode.com/posts";
+      axios.post(baseURL, itemNew)
+      .then(res => console.log(res.data));
+    }
+*/
     render() {  
    
         return (        
@@ -62,13 +97,21 @@ class Home extends React.Component {
                <div className='home_nav_menu'>                 
                 < NavigationMeniu />                                           
                 </div>                
-               <div>
+              
                <div className='home_table'>                 
-                 <HomeTable items={this.state.items}/>                                        
+                 <HomeTable items={this.state.items}
+                 appearForm={this.appearForm}
+                 isHideForm={this.state.isHideForm} 
+                 deleteRow={this.deleteRow}              
+                 handleSubmit={this.handleSubmit}
+              
+             
+               
+                 />                                        
                 </div>                
                
-        </div>
-        </div>
+             </div>
+       
     );
 }
 }

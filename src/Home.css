@@ -1,6 +1,8 @@
 .home{
     display:flex;
     flex-direction: row;
+    height: 900px;
+    overflow: hidden;
 }
 
 .home_nav_menu{
@@ -9,6 +11,14 @@
 }
 
 .home_table{
-    width: 900px;
+    width: 800px;
+    height:900px;
 }
 
+.table_row{
+    height: 20px ;
+}
+
+.table_body{
+    height: 10px;
+}
