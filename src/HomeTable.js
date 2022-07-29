@@ -36,11 +36,9 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow, hand
   return (
     <div>
     <Button variant="contained"
-    onClick={appearForm}
-     >
+    onClick={appearForm} >
           CREATE NEW
-    </Button>
-   
+    </Button>   
    {!isHideForm&&<Box 
  
       component="form"
@@ -50,23 +48,17 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow, hand
       noValidate
       autoComplete="off"
     >
-     
-
-          <div>
+       <div>
       <TextField   onChange={handleChange}
       name='userId' 
        id="outlined-basic" label="UserId" variant="outlined" 
       />
-      <TextField onChange={handleChange}
-      name='id' 
-      id="outlined-basic" label="Id" variant="outlined" />
       <TextField  onChange={handleChange}
        name='title' 
        id="outlined-basic" label="Title" variant="outlined" />
       <TextField  onChange={handleChange}
       name='body' 
-      id="outlined-basic" label="body" variant="outlined" />
-       
+      id="outlined-basic" label="body" variant="outlined" />       
       <Button 
         onClick={handleSubmit}  variant="outlined" size="small">
           SUBMIT
@@ -105,9 +97,7 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow, hand
                      DELETE
                    </Button>
               </StyledTableCell>
-
-            </StyledTableRow >
-            
+            </StyledTableRow >            
           ))}
         </TableBody>
       </Table>

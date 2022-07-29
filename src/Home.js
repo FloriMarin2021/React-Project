@@ -17,49 +17,29 @@ class Home extends React.Component {
 
             post:{
               userId:'',
-              id:'',
               title:'',
               body:''
             },
-          
+
             isHideForm:true
         };
 
     }
    
-   appearForm= ()=> { 
+appearForm= ()=> { 
       this.setState({
-        isHideForm: !this.state.isHideForm,         
+      isHideForm: !this.state.isHideForm,         
       }); 
 }
-  /*
-    // ComponentDidMount is used to
-    // execute the code 
-    componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
-        fetch(baseURL)
-            .then((res) => res.json())
-            .then((json) => {
-                this.setState({
-                    items: json,
-                    isLoaded:true
-                });
-            })
-    }
- */ 
 
- async componentDidMount(){
-      try {
-        await axios.get(baseURL)
-        .then(res => {
-         const items = res.data;
-          this.setState({items});
-        })
-        
-      } catch (error) {
-        console.log(error);
-      }
-  } 
+componentDidMount() {
+  axios.get(baseURL)
+    .then(res => {
+      const items = res.data;
+      console.log("items", items)
+      this.setState({ items});
+    })
+}
 
 handleChange=(event)=>{
   const [name, value] = [event.target.name, event.target.value];
@@ -68,66 +48,41 @@ handleChange=(event)=>{
     ...post,
    [name]: value
  }; 
- console.log("  new post ", newPost) 
    this.setState({ post:newPost});
 }
 
- handleSubmit=(event)=>{
+async  handleSubmit(event){
   event.preventDefault();
-  const items=this.state.items
-  const post=this.state.post 
-  console.log("items before ", items)
-  console.log("post de adaugat ", post)  
+ const items=this.state.items
+ const post=this.state.post 
 
- axios
+await  axios
 .post(baseURL, post)
 .then(response => {
   console.log("response", response);
-  const updatedPosts = [
-    ...items,
-    {userId:post.userId, id:post.id, title:post.title, body:post.body}
-  ];   
-  console.log("update post", updatedPosts)
-  const newItems=[...items, updatedPosts]
-  console.log("newitems", newItems)
-  this.setState({newItems}); 
+  
+     axios
+  .get(baseURL)        
+  .then(res => {
+    const items = res.data;
+    this.setState({ items});
+ })
  
 });
-
-
 }
 
- /*   
-    componentDidMount() {
-      const baseURL =  "https://jsonplaceholder.typicode.com/posts";
-      axios.get(baseURL)
-        .then(res => {
-          const items = res.data;
-          console.log("items", items)
-          this.setState({ items});
-        })
-    }
-*/
-     
-
-/*
-   async deleteRow(idx){
-      await  axios.delete(`https://jsonplaceholder.typicode.com/posts/${idx}`)   
+ async deleteRow(idx){
+      await  axios.delete(`${baseURL}/${idx}`)   
       .then(res => {  
         console.log(res);  
-        console.log(res.data); 
-        const items = this.state.items.filter((item, index) => index!== idx);  
-        this.setState({items });   
+        console.log(res.data);        
       })
        axios.get(baseURL)        
         .then(res => {
           const items = res.data;
           this.setState({ items});
        })
-        }
-*/
-
-
+      }
 
     render() {  
    
@@ -135,21 +90,18 @@ handleChange=(event)=>{
             <div className='home'>
                <div className='home_nav_menu'>                 
                 < NavigationMeniu />                                           
-                </div>                
-              
+                </div>               
                <div className='home_table'>                 
-                 <HomeTable items={this.state.items}
+                 <HomeTable 
+                 items={this.state.items}
                  appearForm={this.appearForm}
                  isHideForm={this.state.isHideForm} 
-                 deleteRow={this.deleteRow}              
-                 handleSubmit={this.handleSubmit}
-                 handleChange={this.handleChange} 
-                 postItems={this.state.postItems}         
+                 deleteRow={(idx)=>this.deleteRow(idx)}              
+                 handleSubmit={(e)=>this.handleSubmit(e)}
+                 handleChange={this.handleChange}         
                  />                                        
-                </div>                
-               
-             </div>
-       
+                </div>         
+             </div>      
     );
 }
 }
