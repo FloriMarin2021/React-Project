@@ -4,6 +4,9 @@ import './Home.css';
 import HomeTable from './HomeTable.js'; 
 import axios from 'axios'
 
+const baseURL =  "https://jsonplaceholder.typicode.com/posts";
+
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -11,15 +14,19 @@ class Home extends React.Component {
         this.state = {
             items: [], 
             isLoaded:false,
-            userId:'',
-            id:'',
-            title:'',
-            body:'',
 
+            post:{
+              userId:'',
+              id:'',
+              title:'',
+              body:''
+            },
+          
             isHideForm:true
         };
-    }
 
+    }
+   
    appearForm= ()=> { 
       this.setState({
         isHideForm: !this.state.isHideForm,         
@@ -39,57 +46,89 @@ class Home extends React.Component {
                 });
             })
     }
- */  
+ */ 
+
+ async componentDidMount(){
+      try {
+        await axios.get(baseURL)
+        .then(res => {
+         const items = res.data;
+          this.setState({items});
+        })
+        
+      } catch (error) {
+        console.log(error);
+      }
+  } 
+
+handleChange=(event)=>{
+  const [name, value] = [event.target.name, event.target.value];
+ const post=this.state.post
+ const newPost = {
+    ...post,
+   [name]: value
+ }; 
+ console.log("  new post ", newPost) 
+   this.setState({ post:newPost});
+}
+
+ handleSubmit=(event)=>{
+  event.preventDefault();
+  const items=this.state.items
+  const post=this.state.post 
+  console.log("items before ", items)
+  console.log("post de adaugat ", post)  
+
+ axios
+.post(baseURL, post)
+.then(response => {
+  console.log("response", response);
+  const updatedPosts = [
+    ...items,
+    {userId:post.userId, id:post.id, title:post.title, body:post.body}
+  ];   
+  console.log("update post", updatedPosts)
+  const newItems=[...items, updatedPosts]
+  console.log("newitems", newItems)
+  this.setState({newItems}); 
+ 
+});
+
+
+}
 
  /*   
-    async componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
-        try {
-          const response = await fetch(baseURL);
-          const json = await response.json();
-          this.setState({ items: json });
-          if (!response.ok) {
-            throw Error(response.statusText);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-    } 
-   */
-  
-componentDidMount() {
-        const baseURL =  "https://jsonplaceholder.typicode.com/posts";
-        axios.get(baseURL)
-          .then(res => {
-            const items = res.data;
-            this.setState({ items});
-          })
-      }
-deleteRow=(idx)=>{
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${idx}`)  
-          .then(res => {  
-            console.log(res);  
-            console.log(res.data); 
-            const items = this.state.items.filter((item, index) => index!== idx);  
-            this.setState({items });            
-          })                  
-      }  
-
-      
- /*     
-handleSubmit=(e)=> {
-        e.preventDefault()
-        const itemNew = {
-          userId:this.state.userId,
-          id:this.state.id,
-          title:this.state.title,
-          body:this.state.body
-      }
+    componentDidMount() {
       const baseURL =  "https://jsonplaceholder.typicode.com/posts";
-      axios.post(baseURL, itemNew)
-      .then(res => console.log(res.data));
+      axios.get(baseURL)
+        .then(res => {
+          const items = res.data;
+          console.log("items", items)
+          this.setState({ items});
+        })
     }
 */
+     
+
+/*
+   async deleteRow(idx){
+      await  axios.delete(`https://jsonplaceholder.typicode.com/posts/${idx}`)   
+      .then(res => {  
+        console.log(res);  
+        console.log(res.data); 
+        const items = this.state.items.filter((item, index) => index!== idx);  
+        this.setState({items });   
+      })
+       axios.get(baseURL)        
+        .then(res => {
+          const items = res.data;
+          this.setState({ items});
+       })
+        }
+*/
+
+
+
     render() {  
    
         return (        
@@ -104,9 +143,8 @@ handleSubmit=(e)=> {
                  isHideForm={this.state.isHideForm} 
                  deleteRow={this.deleteRow}              
                  handleSubmit={this.handleSubmit}
-              
-             
-               
+                 handleChange={this.handleChange} 
+                 postItems={this.state.postItems}         
                  />                                        
                 </div>                
                

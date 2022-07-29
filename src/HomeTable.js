@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 
 
 
-function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow}) {  
+function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow, handleChange}) {  
 
 
   const StyledTableRow = withStyles((theme) => ({
@@ -40,6 +40,7 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow}) {
      >
           CREATE NEW
     </Button>
+   
    {!isHideForm&&<Box 
  
       component="form"
@@ -49,25 +50,28 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow}) {
       noValidate
       autoComplete="off"
     >
-      <TextField 
-  
+     
+
+          <div>
+      <TextField   onChange={handleChange}
       name='userId' 
        id="outlined-basic" label="UserId" variant="outlined" 
       />
-      <TextField 
+      <TextField onChange={handleChange}
       name='id' 
       id="outlined-basic" label="Id" variant="outlined" />
-      <TextField
-       name='title'
+      <TextField  onChange={handleChange}
+       name='title' 
        id="outlined-basic" label="Title" variant="outlined" />
-      <TextField  
-      name='body'
+      <TextField  onChange={handleChange}
+      name='body' 
       id="outlined-basic" label="body" variant="outlined" />
+       
       <Button 
-        onSubmit={handleSubmit}  variant="outlined" size="small">
+        onClick={handleSubmit}  variant="outlined" size="small">
           SUBMIT
-      </Button>
-      
+      </Button>    
+      </div>        
     </Box>}
     <TableContainer component={Paper} className='home_table'>
       <Table aria-label="simple table">
@@ -81,8 +85,8 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow}) {
           </TableRow>
         </TableHead>
         <TableBody className='table_body'>
-          {items.map((item, index) => (            
-            <StyledTableRow  key={item.id}>
+        {items.map((item, index) => (             
+            <StyledTableRow  key={index}>
               <StyledTableCell  component="th" scope="row" >
                 {item.userId}
               </StyledTableCell >
@@ -96,7 +100,7 @@ function HomeTable({items, appearForm, isHideForm, handleSubmit, deleteRow}) {
                    <Button variant="contained" >
                      EDIT
                    </Button>
-                   <Button  onClick={deleteRow(index)}
+                   <Button  onClick={()=>deleteRow(index)}
                    variant="contained" >
                      DELETE
                    </Button>
