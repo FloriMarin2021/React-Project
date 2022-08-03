@@ -50,10 +50,9 @@ class MyTasksPage extends React.Component{
                  
         ] ,
 
-        isModalVisible: false, 
-
+        isModalVisible: false,
         openedTask:"",
-
+        
         newRows:{ 
           nr:'',                 
           description:'',
