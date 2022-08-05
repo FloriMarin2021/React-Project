@@ -6,8 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
-import {menuSelected} from './Actions/graph.js';
-
 
 
 class Graph extends React.Component {
@@ -24,14 +22,14 @@ class Graph extends React.Component {
                       <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
                         Open Menu
                       </Button>
-                          <Menu {...bindMenu(popupState)}>
-                             {this.props.menus.map((menu, index)=>{                       
+                      <Menu {...bindMenu(popupState)}>
+                             {this.props.graphMenu.map((menu, index)=>{                       
                                return (                 
                           <MenuItem  key={index} onClick={popupState.close}>{menu.label}</MenuItem>                       
                               )
                                 })
                                     }
-                            </Menu>
+                            </Menu> 
                     </React.Fragment>                                        
                         )}      
               </PopupState>
@@ -40,16 +38,16 @@ class Graph extends React.Component {
   }     
 }
 
-const mapStateToProps=(state)=>{
- //console.log("state", state)
- //return state;
- console.log("menus", state.menus)
-   return {menus:state.menus}
+const mapStateToProps=(initialState)=>{
+//console.log("initial state", initialState)
+//console.log("MenuOptions", initialState.graphReducer)
+ const graphMenu=initialState.graphReducer
+     return graphMenu
 }
 
+
 export default connect(
-  mapStateToProps,
-  {menuSelected} 
+  mapStateToProps
   ) (Graph);
 
 

@@ -1,15 +1,17 @@
 
 
-export const menuReducer=()=>{
-    return [
+const initialState={
+   graphMenu: [
        {id:"bars", label:"Bars"},
        {id:"lines", label:"Lines"}
     ]
 }
 
-export const selectedMenuReducer=(selectedMenu=null, action)=>{
+export const graphReducer=(state=initialState, action)=>{
     if(action.type==='MENU_SELECTED'){
-        return action.payload;
+        return {
+            ...state,
+        }
     }
-    return selectedMenu;
+    return state;
 }
