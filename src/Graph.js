@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
-import { menuSelected } from './Actions/action';
+import {menuSelected} from './Actions/graph.js';
 
 
 
@@ -48,8 +48,8 @@ const mapStateToProps=(state)=>{
 }
 
 export default connect(
-  mapStateToProps, 
-  {menuSelected}
+  mapStateToProps,
+  {menuSelected} 
   ) (Graph);
 
 

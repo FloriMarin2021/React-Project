@@ -246,7 +246,7 @@ deleteRow=(idx)=>{
                      onClose={this.showModal}           
                      isModalVisible={this.state.isModalVisible} />
                   
-           <TaskForm className='task-form'
+          <TaskForm className='task-form'
                      isHideForm={this.state.isHideForm}               
                      newRows={this.state.newRows}
                      addRow={this.addRow}

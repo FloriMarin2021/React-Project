@@ -23,6 +23,7 @@ class Home extends React.Component {
             isHideForm:true,
             isOpenModal:false,
             infoModal:"",
+            
             newEditPost:{
               userId:'',
               title:'',

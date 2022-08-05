@@ -6,9 +6,7 @@ import Home from './Home';
 import Help from './Help';
 import Graph from './Graph';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from './reducers';
-
+import store from './store';
 
 
 const App=()=>{
@@ -29,6 +27,6 @@ const App=()=>{
 }   
     
       
-ReactDOM.render(<Provider store={createStore(reducers)}>
+ReactDOM.render(<Provider store={store}>
                  <App/>
                 </Provider> , document.getElementById('root'));
