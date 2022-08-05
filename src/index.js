@@ -5,13 +5,12 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './Home';
 import Help from './Help';
 import Graph from './Graph';
-//import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
-/*
-//<Route index element={<Home />} />
-<Route path="mytaskspage" element={<MyTasksPage/>}/>
-          <Route path="graph" element={<Graph />} />
-          <Route path="home" element={<Home />} />
-          <Route path="help" element={<Help/>} />   */ 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
+
+
+
 const App=()=>{
            
   return (
@@ -30,4 +29,6 @@ const App=()=>{
 }   
     
       
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<Provider store={createStore(reducers)}>
+                 <App/>
+                </Provider> , document.getElementById('root'));

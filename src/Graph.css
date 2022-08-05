@@ -1,3 +1,13 @@
 .graph{
+   display: flex;
+   flex-direction: row; 
+}
+
+.nav_menu{
     width: 150px;
+}
+
+.menu{
+    margin-top: 20px;
+    margin-left: 10px;
 }
