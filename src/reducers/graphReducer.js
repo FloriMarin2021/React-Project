@@ -7,24 +7,18 @@ const initialState={
     ],
     displayMenu:" "
 }
-export const handleChange = (event)=> {
-   
-    console.log("event", event.target.value)
-    this.setState({displayMenu: event.target.value });
-  };
 
 export const graphReducer=(state=initialState, action)=>{
     switch(action.type){
-      case action.type==='MENU_SELECTED':
+      case 'MENU_SELECTED':
         return {
             ...state
         }
-      case action.type==='MENU_DISPLAY':
+      case 'MENU_DISPLAY':
        return {
             ...state, 
-           displayMenu:action.payload
+           displayMenu:action.payload.description
        }
-
       
   
  default:

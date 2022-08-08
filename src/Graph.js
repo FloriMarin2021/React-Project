@@ -6,13 +6,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
-
+import { menuDisplay } from './Actions/graph';
 
 
 
 class Graph extends React.Component {
 
-
+handleChange(option){
+ // console.log("option", option.id)
+  this.props.menuDisplay(option);  
+}
   render(){
     return <div className='graph'>
               <div className='nav_menu'>               
@@ -31,7 +34,7 @@ class Graph extends React.Component {
                                return (                 
                           <MenuItem 
                            key={index} 
-                           onClick={this.handleChange}
+                           onClick={()=>{this.handleChange(menu); popupState.close()}}
                            value={menu.label}
                            >{menu.label} 
                            </MenuItem>                       
@@ -43,8 +46,8 @@ class Graph extends React.Component {
                         )}      
               </PopupState>
             </div>  
-            <div>{this.props.displayMenu}</div>
-            <div>val2</div>                  
+            <div>Afisare meniu :{this.props.displayMenu.label}</div>
+                             
           </div> 
   }     
 }
@@ -54,18 +57,16 @@ const mapStateToProps=(initialState)=>{
  
 console.log("initial state", initialState)
 console.log("MenuOptions", initialState.graphReducer)
- const graphMenu=initialState.graphReducer
- const displayMenu=initialState.graphReducer.displayMenu
-console.log("display menu", displayMenu)
-
-
+ //const graphMenu=initialState.graphReducer
+const displayMenu=initialState.graphReducer.displayMenu
+console.log("display menu", displayMenu.label)
  
-     return graphMenu
+     return initialState.graphReducer
 }
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps, {menuDisplay}
   ) (Graph);
 
 
