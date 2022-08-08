@@ -8,7 +8,10 @@ import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
 
 
+
+
 class Graph extends React.Component {
+
 
   render(){
     return <div className='graph'>
@@ -22,10 +25,16 @@ class Graph extends React.Component {
                       <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
                         Open Menu
                       </Button>
-                      <Menu {...bindMenu(popupState)}>
+                      <Menu 
+                       {...bindMenu(popupState)}>
                              {this.props.graphMenu.map((menu, index)=>{                       
                                return (                 
-                          <MenuItem  key={index} onClick={popupState.close}>{menu.label}</MenuItem>                       
+                          <MenuItem 
+                           key={index} 
+                           onClick={this.handleChange}
+                           value={menu.label}
+                           >{menu.label} 
+                           </MenuItem>                       
                               )
                                 })
                                     }
@@ -33,15 +42,24 @@ class Graph extends React.Component {
                     </React.Fragment>                                        
                         )}      
               </PopupState>
-            </div>                  
+            </div>  
+            <div>{this.props.displayMenu}</div>
+            <div>val2</div>                  
           </div> 
   }     
 }
 
+
 const mapStateToProps=(initialState)=>{
-//console.log("initial state", initialState)
-//console.log("MenuOptions", initialState.graphReducer)
+ 
+console.log("initial state", initialState)
+console.log("MenuOptions", initialState.graphReducer)
  const graphMenu=initialState.graphReducer
+ const displayMenu=initialState.graphReducer.displayMenu
+console.log("display menu", displayMenu)
+
+
+ 
      return graphMenu
 }
 

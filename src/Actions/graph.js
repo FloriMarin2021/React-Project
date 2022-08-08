@@ -1,8 +1,15 @@
 
-export const menuSelected=menu=>{
+export const menuSelected=(menu)=>{
     return {
         type:'MENU_SELECTED',
-        payload:menu
+        payload:{menu}
+    };
+};
+
+export const menuDisplay=(description)=>{
+    return {
+        type:'MENU_DISPLAY',
+        payload:{description}
     };
 };
 
