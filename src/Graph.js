@@ -6,9 +6,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
-import { menuDisplay } from './Actions/graph';
+import { menuDisplay, fetchProductsRequest, fetchProductsSucces, fetchProductError } from './Actions/graph';
+import axios from 'axios'
 
 
+const baseURL =  "https://fakestoreapi.com/products";
 
 class Graph extends React.Component {
 
@@ -16,6 +18,25 @@ handleChange(option){
  // console.log("option", option.id)
   this.props.menuDisplay(option);  
 }
+
+componentDidMount() {
+  
+ try{ 
+ console.log("api request", this.props.fetchProductsRequest());
+  axios.get(baseURL)
+    .then(res => {
+      const products = res.data;
+      console.log("products", products)
+      console.log("api products", this.props.fetchProductsSucces(products))
+    })
+ }
+  
+ catch(error){
+  console.log("api error", this.props.fetchProductError(error))
+ } 
+
+}
+
   render(){
     return <div className='graph'>
               <div className='nav_menu'>               
@@ -66,7 +87,8 @@ console.log("display menu", displayMenu.label)
 
 
 export default connect(
-  mapStateToProps, {menuDisplay}
+  mapStateToProps, {menuDisplay, fetchProductsSucces, fetchProductsRequest,fetchProductError},
+ 
   ) (Graph);
 
 

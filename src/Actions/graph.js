@@ -13,3 +13,23 @@ export const menuDisplay=(description)=>{
     };
 };
 
+export const fetchProductsRequest=()=>{
+    return {
+        type: 'FETCH_PRODUCTS_REQUEST'
+    }
+}
+
+export const fetchProductsSucces=(products)=>{
+    return {
+        type:'FETCH_PRODUCTS_SUCCESS',
+        payload:{products}
+    }
+}
+
+export const fetchProductError=(error)=>{
+    return {
+        type:'FETCH_PRODUCTS_ERROR',
+        payload:error
+    }
+}
+
