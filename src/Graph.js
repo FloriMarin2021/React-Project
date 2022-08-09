@@ -6,7 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
-import { menuDisplay, fetchProductsRequest, fetchProductsSucces, fetchProductError } from './Actions/graph';
+import { menuDisplay, fetchProductsRequest, 
+        fetchProductsSucces, fetchProductError, hideGraphOne, hideGraphTwo} from './Actions/graph';
 import axios from 'axios'
 import{ LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts";
 
@@ -37,6 +38,15 @@ async componentDidMount() {
  } 
 }
 
+appearGraph= ()=> { 
+    if(this.props.displayMenu.id==='bars'){
+          this.props.hideGraphOne();
+        }
+    else{
+         this.props.hideGraphTwo();
+        }
+       }
+
   render(){
     return <div className='graph'>
               <div className='nav_menu'>               
@@ -55,7 +65,7 @@ async componentDidMount() {
                                return (                 
                           <MenuItem 
                            key={index} 
-                           onClick={()=>{this.handleChange(menu); popupState.close()}}
+                           onClick={()=>{this.handleChange(menu); popupState.close(); this.appearGraph()}}
                            value={menu.label}
                            >{menu.label} 
                            </MenuItem>                       
@@ -68,7 +78,7 @@ async componentDidMount() {
               </PopupState>
             </div>  
             <div>Afisare meniu :{this.props.displayMenu.label}</div>
-           <LineChart
+      {!this.props.isHideGraph_One&&<LineChart
       width={500}
       height={300}
       data={this.props.products}
@@ -90,7 +100,31 @@ async componentDidMount() {
         stroke="#8884d8"
         activeDot={{ r: 8 }}
       />      
-    </LineChart>                          
+    </LineChart> 
+  }
+    {!this.props.isHideGraph_Two&&<LineChart
+      width={500}
+      height={300}
+      data={this.props.products}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="id" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="rating.count"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />      
+    </LineChart> }                          
             </div>          
           
   }     
@@ -105,14 +139,17 @@ const mapStateToProps=(initialState)=>{
 //const displayMenu=initialState.graphReducer.displayMenu
 //console.log("display menu", displayMenu)
 //const products=initialState.graphReducer.products
-//console.log("products price", products[0].price)
+//console.log("products price", products)
+//const isHideGraph=initialState.graphReducer.isHideGraph
+//console.log("is hide graph", isHideGraph)
  
      return initialState.graphReducer
 }
 
 
 export default connect(
-  mapStateToProps, {menuDisplay, fetchProductsSucces, fetchProductsRequest,fetchProductError},
+  mapStateToProps, {menuDisplay, fetchProductsSucces, 
+    fetchProductsRequest,fetchProductError, hideGraphOne, hideGraphTwo},
  
   ) (Graph);
 

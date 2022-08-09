@@ -33,3 +33,20 @@ export const fetchProductError=(error)=>{
     }
 }
 
+export const hideGraphOne=()=>{
+    return {
+        type:'HIDE_GRAPH_ONE'              
+    }
+}
+
+export const hideGraphTwo=()=>{
+    return {
+        type:'HIDE_GRAPH_TWO'              
+    }
+}
+
+
+
+
+
+

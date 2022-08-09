@@ -65,7 +65,7 @@ componentDidMount() {
   axios.get(baseURL)
     .then(res => {
       const items = res.data;
-      console.log("items", items)
+     // console.log("items", items)
       this.setState({ items});
     })
 }
@@ -103,7 +103,7 @@ handleEditChange=(event)=>{
 async  handleEditSubmit(e ){
   e.preventDefault();
  const newEditPost=this.state.newEditPost
- console.log("newEditPost", newEditPost);
+// console.log("newEditPost", newEditPost);
  const id=newEditPost.id
  //console.log("idx", id)
  
@@ -118,7 +118,7 @@ await  axios
   .get(baseURL)        
   .then(res => {
     const items = res.data;
-    console.log("update items", items);
+   // console.log("update items", items);
     this.setState({ items});
  })
  

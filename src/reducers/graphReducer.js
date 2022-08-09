@@ -8,7 +8,9 @@ const initialState={
     displayMenu:" ",
     loading:true,
     products:[],
-    errorMessage:''
+    errorMessage:'',
+    isHideGraph_One:true,
+    isHideGraph_Two:true
 }
 
 export const graphReducer=(state=initialState, action)=>{
@@ -37,7 +39,7 @@ export const graphReducer=(state=initialState, action)=>{
            products:action.payload.products,
            error:'no error'
         }
-        
+
         case 'FETCH_PRODUCTS_ERROR':
             return {
                  ...state, 
@@ -45,6 +47,21 @@ export const graphReducer=(state=initialState, action)=>{
                products:[],
                error:action.payload
             }
+
+      case 'HIDE_GRAPH_ONE':
+         return {
+            ...state, 
+          isHideGraph_One:false,
+          isHideGraph_Two:true
+       }
+
+       case 'HIDE_GRAPH_TWO':
+        return {
+           ...state, 
+         isHideGraph_One:true,
+         isHideGraph_Two:false
+      }
+
       
       
   
