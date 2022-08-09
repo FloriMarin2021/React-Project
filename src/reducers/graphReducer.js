@@ -17,16 +17,19 @@ export const graphReducer=(state=initialState, action)=>{
         return {
             ...state
         }
+
       case 'MENU_DISPLAY':
        return {
             ...state, 
            displayMenu:action.payload.description
        }
+
        case 'FETCH_PRODUCTS_REQUEST':
        return {
             ...state, 
           loading:true
        }
+
        case 'FETCH_PRODUCTS_SUCCESS':
         return {
              ...state, 
@@ -34,6 +37,7 @@ export const graphReducer=(state=initialState, action)=>{
            products:action.payload.products,
            error:'no error'
         }
+        
         case 'FETCH_PRODUCTS_ERROR':
             return {
                  ...state, 

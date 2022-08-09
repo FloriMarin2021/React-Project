@@ -8,6 +8,7 @@ import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import {connect} from 'react-redux';
 import { menuDisplay, fetchProductsRequest, fetchProductsSucces, fetchProductError } from './Actions/graph';
 import axios from 'axios'
+import{ LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts";
 
 
 const baseURL =  "https://fakestoreapi.com/products";
@@ -19,22 +20,21 @@ handleChange(option){
   this.props.menuDisplay(option);  
 }
 
-componentDidMount() {
-  
+async componentDidMount() {  
  try{ 
- console.log("api request", this.props.fetchProductsRequest());
-  axios.get(baseURL)
+  this.props.fetchProductsRequest();
+
+  await axios.get(baseURL)
     .then(res => {
       const products = res.data;
-      console.log("products", products)
-      console.log("api products", this.props.fetchProductsSucces(products))
+     // console.log("products", products)      
+      this.props.fetchProductsSucces(products);
     })
  }
   
  catch(error){
-  console.log("api error", this.props.fetchProductError(error))
+  this.props.fetchProductError(error);
  } 
-
 }
 
   render(){
@@ -68,19 +68,44 @@ componentDidMount() {
               </PopupState>
             </div>  
             <div>Afisare meniu :{this.props.displayMenu.label}</div>
-                             
-          </div> 
+           <LineChart
+      width={500}
+      height={300}
+      data={this.props.products}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="id" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="price"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />      
+    </LineChart>                          
+            </div>          
+          
   }     
 }
 
 
 const mapStateToProps=(initialState)=>{
  
-console.log("initial state", initialState)
-console.log("MenuOptions", initialState.graphReducer)
- //const graphMenu=initialState.graphReducer
-const displayMenu=initialState.graphReducer.displayMenu
-console.log("display menu", displayMenu.label)
+//console.log("initial state", initialState)
+//console.log("MenuOptions", initialState.graphReducer)
+//const graphMenu=initialState.graphReducer
+//const displayMenu=initialState.graphReducer.displayMenu
+//console.log("display menu", displayMenu)
+//const products=initialState.graphReducer.products
+//console.log("products price", products[0].price)
  
      return initialState.graphReducer
 }
