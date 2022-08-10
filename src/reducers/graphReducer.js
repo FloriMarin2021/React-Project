@@ -57,8 +57,8 @@ export const graphReducer=(state=initialState, action)=>{
 
        case 'HIDE_GRAPH_TWO':
         return {
-           ...state, 
-         isHideGraph_One:true,
+           ...state,
+         isHideGraph_One:true, 
          isHideGraph_Two:false
       }
 
