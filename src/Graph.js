@@ -6,6 +6,8 @@ import { menuDisplay, fetchProductsRequest,
         fetchProductsSucces, fetchProductError, hideGraphOne, hideGraphTwo} from './Actions/graph';
 import axios from 'axios'
 import GraphMenu from './GraphMenu';
+import LineChartGraph from './LineChartGraph';
+import BarsChartGraph from './BarsChartGraph';
 
 
 const baseURL =  "https://fakestoreapi.com/products";
@@ -53,10 +55,15 @@ appearGraph=()=> {
                    handleChange={(option)=>this.handleChange(option)}
                    products={this.props.products}
                    graphMenu={this.props.graphMenu}
-                   displayMenu={this.props.displayMenu}
-                   isHideGraph_One={this.props.isHideGraph_One}
-                   isHideGraph_Two={this.props.isHideGraph_Two}
-                     /></div>                  
+                   displayMenu={this.props.displayMenu}                 
+                     /></div> 
+                 <div>Afisare meniu :{this.props.displayMenu.label}</div>
+                <LineChartGraph 
+                  isHideGraph_One={this.props.isHideGraph_One}
+                  products={this.props.products}/>
+                <BarsChartGraph 
+                  isHideGraph_Two={this.props.isHideGraph_Two}
+                  products={this.props.products}/>                              
               </div>                           
   } 
 }

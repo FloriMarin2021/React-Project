@@ -3,8 +3,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import LineChartGraph from './LineChartGraph';
-import BarsChartGraph from './BarsChartGraph';
+
 
 function GraphMenu(props){
 //console.log("props", props);
@@ -36,9 +35,7 @@ function GraphMenu(props){
                         )}      
               </PopupState>
             </div>  
-            <div>Afisare meniu :{props.displayMenu.label}</div>
-              {!props.isHideGraph_One&&<LineChartGraph products={props.products}/>}
-              {!props.isHideGraph_Two&&<BarsChartGraph products={props.products}/>}           
+                     
         </div>
     );
 }

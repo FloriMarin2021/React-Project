@@ -5,7 +5,8 @@ function LineChartGraph(props){
 
     return(
         <div>
-            <LineChart
+  {!props.isHideGraph_One&&<LineChart
+      appearGraph={props.appearGraph}
       width={500}
       height={300}
       data={props.products}
@@ -27,7 +28,7 @@ function LineChartGraph(props){
         stroke="#8884d8"
         activeDot={{ r: 8 }}
       />      
-    </LineChart> 
+    </LineChart> }
         </div>
     )
 }
