@@ -7,7 +7,7 @@ class BarsChartGraph extends React.Component {
 render(){
 return(
   <div>
- {!this.props.isHideGraph_Two && <BarChart
+ <BarChart
          width={500}
          height={300}
          data={this.props.products}
@@ -24,7 +24,7 @@ return(
       <Legend />
       <Bar  dataKey="rating.count" fill="#8884d8" />
       <Bar dataKey="price" fill="#82ca9d" />
-    </BarChart>  }
+    </BarChart>  
   </div>
 );
 }

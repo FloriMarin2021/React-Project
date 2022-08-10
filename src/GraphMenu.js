@@ -12,7 +12,8 @@ function GraphMenu(props){
         <div>
              <div className='menu'>                   
                 <PopupState variant="popover" popupId="demo-popup-menu">
-                    {(popupState) => (                      
+                    {(popupState) => (
+                                              
                    <React.Fragment>                                          
                       <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
                         Open Menu
@@ -23,7 +24,7 @@ function GraphMenu(props){
                                return (                 
                           <MenuItem 
                            key={index} 
-                           onClick={()=>{props.handleChange(menu); popupState.close()}}
+                           onClick={()=>{props.handleChange(menu, popupState)}}
                            value={menu.label}
                            >{menu.label} 
                            </MenuItem>                       
