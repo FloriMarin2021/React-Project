@@ -5,20 +5,19 @@ import HelpTabs from './HelpTabs';
 import {connect} from 'react-redux';
 import { tabSelected, tabDisplay, tabValue} from './Actions/help';
 import DatePicker from "react-datepicker";
-//import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 class Help extends React.Component {
-  
+ 
   handleChange = (option) => {    
-  this.props.tabDisplay(option);
-
+  this.props.tabDisplay(option); 
   };
-
+ 
   handleChangeValue=(newValue)=>{
     this.props.tabValue(newValue);
   }
-
 
   render(){
 
@@ -33,17 +32,27 @@ class Help extends React.Component {
              handleChangeValue={this.handleChangeValue}
              tabOption={this.props.tabOption}
              value={this.props.value}
+             displayTab={this.props.displayTab}
              />
          </div>
-         <div>{this.props.displayTab.label}</div> 
+         
+     <div  role="tabpanel"
+     >{this.props.displayTab.label}</div>
+     
+        
        
-       { this.props.displayTab.id==='one'?
-            <DatePicker   showTimeSelect
-                          timeFormat="HH:mm"
-                          timeIntervals={15}
-                          timeCaption="time"
-                          dateFormat="MMMM d, yyyy h:mm aa"
-                          selected={new Date()}/>:null}
+       { this.props.displayTab.id==='one'?           
+             <div className="form-group">
+               <DatePicker
+                   selected={ new Date()}                  
+                   showTimeSelect
+                   timeFormat="HH:mm"
+                   timeIntervals={20}
+                   timeCaption="time"
+                   dateFormat="MMMM d, yyyy h:mm aa"                
+               />              
+             </div>
+           :null}
     </div>
   );
   }
@@ -51,10 +60,7 @@ class Help extends React.Component {
 
 
 const mapStateToProps=(initialState)=>{
-// console.log("initialstate", initialState.helpReducer)
- //const value=initialState.helpReducer.value
-  return initialState.helpReducer
-  
+ return initialState.helpReducer  
 }
 
 
