@@ -37,17 +37,14 @@ class Help extends React.Component {
          </div>
          
      <div  role="tabpanel"
-     >{this.props.displayTab.label}</div>
-     
-        
+     >{this.props.displayTab.label}</div>       
        
        { this.props.displayTab.id==='one'?           
-             <div className="form-group">
+             <div>
                <DatePicker
                    selected={ new Date()}                  
                    showTimeSelect
                    timeFormat="HH:mm"
-                   timeIntervals={20}
                    timeCaption="time"
                    dateFormat="MMMM d, yyyy h:mm aa"                
                />              
