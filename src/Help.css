@@ -1,3 +1,21 @@
 .help{
+    display:flex;
+    flex-direction: row;
+}
+
+.help_menu{
     width: 150px;
 }
+
+.help_tabs{
+    display:flex;
+    height: 224px;
+    flex-grow: 1;  
+    flex-direction: column;
+    
+}
+
+.help_tab{
+    border-right:1px solid ;   
+}
+
