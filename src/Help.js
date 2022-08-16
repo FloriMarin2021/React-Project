@@ -3,19 +3,14 @@ import './Help.css';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import HelpTabs from './HelpTabs';
 import {connect} from 'react-redux';
-import { tabSelected, tabDisplay, tabValue} from './Actions/help';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {tabValue} from './Actions/help';
+
 
 
 
 class Help extends React.Component {
  
-  handleChange = (option) => {    
-  this.props.tabDisplay(option); 
-  };
- 
-  handleChangeValue=(newValue)=>{
+  handleChangeValue=(event, newValue)=>{
     this.props.tabValue(newValue);
   }
 
@@ -27,34 +22,16 @@ class Help extends React.Component {
              <NavigationMeniu />
          </div>
          <div >
-             <HelpTabs
-             handleChange={(option)=>this.handleChange(option)}
-             handleChangeValue={this.handleChangeValue}
+             <HelpTabs          
+             handleChangeValue={(event, newValue)=>this.handleChangeValue(event, newValue)}
              tabOption={this.props.tabOption}
-             value={this.props.value}
-             displayTab={this.props.displayTab}
+             value={this.props.value}            
              />
-         </div>
-         
-     <div  role="tabpanel"
-     >{this.props.displayTab.label}</div>       
-       
-       { this.props.displayTab.id==='one'?           
-             <div>
-               <DatePicker
-                   selected={ new Date()}                  
-                   showTimeSelect
-                   timeFormat="HH:mm"
-                   timeCaption="time"
-                   dateFormat="MMMM d, yyyy h:mm aa"                
-               />              
-             </div>
-           :null}
+         </div>  
     </div>
   );
   }
 }
-
 
 const mapStateToProps=(initialState)=>{
  return initialState.helpReducer  
@@ -62,7 +39,7 @@ const mapStateToProps=(initialState)=>{
 
 
 export default connect(
-mapStateToProps, {tabSelected, tabDisplay, tabValue},
+mapStateToProps, {tabValue},
 
 ) (Help);
 
