@@ -2,21 +2,54 @@ import React from 'react';
 import './Help.css'; 
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import HelpTabs from './HelpTabs';
+import axios from 'axios'
 import {connect} from 'react-redux';
-import {tabValue, calendarChange} from './Actions/help';
+import {tabValue, calendarChange, fetchDataRequest, 
+        fetchDataSucces, fetchDataError, showSuccessSnackbar, clearSnackbar } from './Actions/help';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from "@material-ui/core/IconButton";
+import { Icon } from "@material-ui/core";
 
 
 
+const baseURL =  "https://dummy.restapiexample.com/api/v1/employees";
 
 class Help extends React.Component {
  
-  handleChangeValue=(event, newValue)=>{
+handleChangeValue=(event, newValue)=>{
     this.props.tabValue(newValue);
   }
  
-  handleCalendarChange=(newDate)=>{
+handleCalendarChange=(newDate)=>{
     this.props.calendarChange(newDate)
     }
+
+handleCloseSnackBar=()=>{
+  this.props.clearSnackbar()
+}
+
+  
+async componentDidMount() {  
+  try{ 
+   this.props.fetchDataRequest();
+ 
+   await axios.get(baseURL)
+     .then(res => {
+       const dataApi = res.data;     
+      // console.log("status", dataApi.status)
+      //   console.log("data employees", dataApi.data) 
+     //  console.log("message1", dataApi.message)       
+       this.props.fetchDataSucces(dataApi);
+       this.props.showSuccessSnackbar();
+ 
+     })
+  }
+   
+  catch(error){
+   this.props.fetchDataError(error);
+   this.props.clearSnackbar();
+  } 
+ }
 
   render(){
 
@@ -32,9 +65,33 @@ class Help extends React.Component {
              value={this.props.value}
              date={this.props.date}
              handleCalendarChange={this.handleCalendarChange}
-                     
+             dataApi={this.props.dataApi}                     
              />
-         </div>  
+         </div> 
+         <div>
+          {!this.props.loading?<Snackbar
+              anchorOrigin={{
+              vertical: "top",
+              horizontal: "left"
+             }}
+             open={this.props.isSnackBarOpen}
+             autoHideDuration={4000}
+             onClose={this.handleCloseSnackBar}
+             aria-describedby="client-snackbar"
+             message={this.props.dataApi.message}      
+             action={[
+                <IconButton
+                   key="close"
+                   aria-label="close"
+                   color="inherit"
+                   onClick={this.handleCloseSnackBar}
+                   >
+                <Icon>close</Icon>
+               </IconButton>
+      ]}
+    />:null}
+         </div>
+         
     </div>
   );
   }
@@ -46,7 +103,8 @@ const mapStateToProps=(initialState)=>{
 
 
 export default connect(
-mapStateToProps, {tabValue, calendarChange},
+mapStateToProps, {tabValue, calendarChange, fetchDataRequest, 
+                  fetchDataSucces, fetchDataError, clearSnackbar, showSuccessSnackbar },
 
 ) (Help);
 

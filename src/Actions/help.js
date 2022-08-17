@@ -13,6 +13,38 @@ export const calendarChange=(date)=>{
 };
 
 
+export const fetchDataRequest=()=>{
+    return {
+        type: 'FETCH_DATA_REQUEST'
+    }
+}
+
+export const fetchDataSucces=(dataApi)=>{
+    return {
+        type:'FETCH_DATA_SUCCESS',
+        payload:{dataApi}
+    }
+}
+
+export const fetchDataError=(error)=>{
+    return {
+        type:'FETCH_DATA_ERROR',
+        payload:error
+    }
+}
+
+export const showSuccessSnackbar = () => {
+    return {
+        type:'SNACKBAR_SUCCESS',
+        
+    }    
+  };
+  
+export const clearSnackbar = () => {
+    return {
+        type:'SNACKBAR_CLEAR'      
+    }   
+  };
 
 
 

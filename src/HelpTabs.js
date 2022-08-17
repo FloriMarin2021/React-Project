@@ -4,18 +4,24 @@ import Tab from '@material-ui/core/Tab';
 import './Help.css'; 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+
+
 
 
 
  function HelpTabs(props) {
  //console.log("props date", props.date)
+ // console.log("props dataApi", props.dataApi.data)
 
     return (
         
       <div className='help_tabs'>        
         <Tabs className='help_tab'          
             aria-label={"Vertical tabs example"}
-            orientation={"vertical"}         
+            orientation={"horizontal"}         
             scrollButtons={'on'}
             variant={"scrollable"}          
             value={props.value}
@@ -45,8 +51,16 @@ import "react-datepicker/dist/react-datepicker.css";
                       />
             
         :null}           
-        { props.value===1? <div>Item Two </div>:null}
-        {props.value===2? <div> Item Three </div>:null}    
+        { props.value===1? <div><Autocomplete
+                     id="combo-box-demo"
+                     options={props.dataApi.data}                    
+                     getOptionLabel={(option) => option.employee_name}
+                     style={{ width: 300 }}
+                     renderInput={(params) =>
+                      <TextField {...params} label="Combo box" variant="outlined" />}
+                     
+    /> </div>:null}
+        {props.value===2? <div> item 3 </div>:null}    
        </div>
     );
   }
