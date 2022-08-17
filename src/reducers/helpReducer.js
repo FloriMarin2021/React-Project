@@ -4,7 +4,8 @@ const initialState={
     { label:"Item Two"},
     { label:"Item Three"}
        ],    
-    value:0 
+    value:0, 
+    date:new Date(),
    
  }
 
@@ -15,7 +16,12 @@ const initialState={
             return {
                  ...state, 
                 value:action.payload.value
-            }  
+            } 
+        case 'CALENDAR_CHANGE':
+                return {
+                     ...state, 
+                    date:action.payload.date
+                }   
          
         default:
           return state;

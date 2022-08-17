@@ -3,7 +3,7 @@ import './Help.css';
 import NavigationMeniu from './NavigationMeniu/NavigationMeniu';
 import HelpTabs from './HelpTabs';
 import {connect} from 'react-redux';
-import {tabValue} from './Actions/help';
+import {tabValue, calendarChange} from './Actions/help';
 
 
 
@@ -13,6 +13,10 @@ class Help extends React.Component {
   handleChangeValue=(event, newValue)=>{
     this.props.tabValue(newValue);
   }
+ 
+  handleCalendarChange=(newDate)=>{
+    this.props.calendarChange(newDate)
+    }
 
   render(){
 
@@ -25,7 +29,10 @@ class Help extends React.Component {
              <HelpTabs          
              handleChangeValue={(event, newValue)=>this.handleChangeValue(event, newValue)}
              tabOption={this.props.tabOption}
-             value={this.props.value}            
+             value={this.props.value}
+             date={this.props.date}
+             handleCalendarChange={this.handleCalendarChange}
+                     
              />
          </div>  
     </div>
@@ -39,7 +46,7 @@ const mapStateToProps=(initialState)=>{
 
 
 export default connect(
-mapStateToProps, {tabValue},
+mapStateToProps, {tabValue, calendarChange},
 
 ) (Help);
 

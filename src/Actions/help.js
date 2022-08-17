@@ -5,6 +5,13 @@ export const tabValue=(value)=>{
     };
 };
 
+export const calendarChange=(date)=>{
+    return {
+        type:'CALENDAR_CHANGE',
+        payload:{date}
+    };
+};
+
 
 
 

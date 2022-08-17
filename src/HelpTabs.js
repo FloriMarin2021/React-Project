@@ -6,8 +6,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
+
  function HelpTabs(props) {
- // console.log("props value", props.value)
+ //console.log("props date", props.date)
 
     return (
         
@@ -33,13 +34,17 @@ import "react-datepicker/dist/react-datepicker.css";
                                     }                                                                 
             </Tabs>
       
-       { props.value===0? <DatePicker
-                   selected={ new Date()}                  
-                   showTimeSelect
-                   timeFormat="HH:mm"
-                   timeCaption="time"
-                   dateFormat="MMMM d, yyyy h:mm aa" />             
-                :null}           
+        { props.value===0?      
+          <DatePicker
+                    selected={props.date }
+                    onChange={props.handleCalendarChange}
+                    value={props.date}               
+                    dateFormat="MMMM d, yyyy h:mm aa"                 
+                    showTimeInput
+                    shouldCloseOnSelect={true}                                     
+                      />
+            
+        :null}           
         { props.value===1? <div>Item Two </div>:null}
         {props.value===2? <div> Item Three </div>:null}    
        </div>
