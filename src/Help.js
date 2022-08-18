@@ -17,7 +17,11 @@ const baseURL =  "https://dummy.restapiexample.com/api/v1/employees";
 class Help extends React.Component {
  
 handleChangeValue=(event, newValue)=>{
-    this.props.tabValue(newValue);
+if(newValue===1){
+    this.getDataApi();
+}
+      this.props.tabValue(newValue);
+   // console.log("newvalue", newValue)  
   }
  
 handleCalendarChange=(newDate)=>{
@@ -28,8 +32,33 @@ handleCloseSnackBar=()=>{
   this.props.clearSnackbar()
 }
 
+async getDataApi() {   
+  try{ 
+   this.props.fetchDataRequest(); 
+   await axios.get(baseURL)
+     .then(res => {
+       const dataApi = res.data;     
+      // console.log("status", dataApi.status)
+    //   console.log("data employees", dataApi.data.length) 
+       console.log("message1", dataApi.message)       
+       this.props.fetchDataSucces(dataApi);
+       this.props.showSuccessSnackbar();
+ 
+     })
+  }
+   
+  catch(error){
+   this.props.fetchDataError(error);
+   this.props.clearSnackbar();
+  }
+
+ }
+// componentDidMount(){
+//  this.getDataApi();
+// }
+/*
+async componentDidMount() { 
   
-async componentDidMount() {  
   try{ 
    this.props.fetchDataRequest();
  
@@ -37,7 +66,7 @@ async componentDidMount() {
      .then(res => {
        const dataApi = res.data;     
       // console.log("status", dataApi.status)
-      //   console.log("data employees", dataApi.data) 
+       console.log("data employees", dataApi.data.length) 
      //  console.log("message1", dataApi.message)       
        this.props.fetchDataSucces(dataApi);
        this.props.showSuccessSnackbar();
@@ -48,9 +77,10 @@ async componentDidMount() {
   catch(error){
    this.props.fetchDataError(error);
    this.props.clearSnackbar();
-  } 
- }
+  }
 
+ }
+ */
   render(){
 
   return (
@@ -65,7 +95,8 @@ async componentDidMount() {
              value={this.props.value}
              date={this.props.date}
              handleCalendarChange={this.handleCalendarChange}
-             dataApi={this.props.dataApi}                     
+             dataApi={this.props.dataApi} 
+                            
              />
          </div> 
          <div>

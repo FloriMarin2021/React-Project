@@ -7,14 +7,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-
+//   options={props.dataApi.data} 
 
 
 
 
  function HelpTabs(props) {
- //console.log("props date", props.date)
- // console.log("props dataApi", props.dataApi.data)
+//console.log("props date", props)
+ //console.log("props dataApi", props.dataApi.data)
 
     return (
         
@@ -50,16 +50,17 @@ import Autocomplete from '@mui/material/Autocomplete';
                     shouldCloseOnSelect={true}                                     
                       />
             
-        :null}           
-        { props.value===1? <div><Autocomplete
+        :null}  
+              
+        { props.value===1?  <div >{props.dataApi.data?<Autocomplete
                      id="combo-box-demo"
-                     options={props.dataApi.data}                    
-                     getOptionLabel={(option) => option.employee_name}
+                     options={props.dataApi.data}                     
+                     getOptionLabel={(option) => option.employee_name}                
                      style={{ width: 300 }}
                      renderInput={(params) =>
                       <TextField {...params} label="Combo box" variant="outlined" />}
-                     
-    /> </div>:null}
+
+    />:null} </div>:null}
         {props.value===2? <div> item 3 </div>:null}    
        </div>
     );
