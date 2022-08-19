@@ -7,10 +7,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-//   options={props.dataApi.data} 
-
-
-
 
  function HelpTabs(props) {
 //console.log("props date", props)
@@ -34,7 +30,7 @@ import Autocomplete from '@mui/material/Autocomplete';
                             aria-controls={`vertical-tabpanel-${index}`}
                             aria-labelledby={`simple-tab-${index}`}
                             label={tab.label}                                                   
-                       />                                                 
+                       />                                            
                               )                             
                                 })                                 
                                     }                                                                 
@@ -48,11 +44,10 @@ import Autocomplete from '@mui/material/Autocomplete';
                     dateFormat="MMMM d, yyyy h:mm aa"                 
                     showTimeInput
                     shouldCloseOnSelect={true}                                     
-                      />
-            
+                      />            
         :null}  
               
-        { props.value===1?  <div >{props.dataApi.data?<Autocomplete
+        { props.value===1 && props.dataApi?  <div >{props.dataApi.data? <Autocomplete
                      id="combo-box-demo"
                      options={props.dataApi.data}                     
                      getOptionLabel={(option) => option.employee_name}                
@@ -60,7 +55,7 @@ import Autocomplete from '@mui/material/Autocomplete';
                      renderInput={(params) =>
                       <TextField {...params} label="Combo box" variant="outlined" />}
 
-    />:null} </div>:null}
+    />:null}</div>:null}
         {props.value===2? <div> item 3 </div>:null}    
        </div>
     );

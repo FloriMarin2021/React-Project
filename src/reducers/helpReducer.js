@@ -7,13 +7,13 @@ const initialState={
     value:0, 
     date:new Date(),
     loading:true,
-    dataApi:[],
-    errorMessage:'loading error',
+    dataApi:null,
+    error:'',
     isSnackBarOpen:true,  
  }
 
  export const helpReducer=(state=initialState, action)=>{
-    
+ 
     switch(action.type){
         case 'TAB_VALUE':
             return {
@@ -36,16 +36,16 @@ const initialState={
                      return {
                           ...state, 
                         loading:false,
-                        dataApi:action.payload.dataApi,
-                     
+                        dataApi:action.payload.dataApi                                                         
                      }
              
          case 'FETCH_DATA_ERROR':
                  return {
                       ...state, 
                      loading:false,
-                     data:[],
-                     error:action.payload
+                     dataApi:null,
+                     error:action.payload.error
+                  
                          } 
 
         case "SNACKBAR_SUCCESS":
@@ -54,12 +54,11 @@ const initialState={
                  isSnackBarOpen:true,
                              
                             };
-        case "SNACKBAR_CLEAR":
-                 return {
-                 ...state,
-                 isSnackBarOpen:false
-                         };     
-                   
+         case "SNACKBAR_CLEAR":
+                   return {
+                   ...state,
+                  isSnackBarOpen:false
+                             }                  
          
         default:
           return state;

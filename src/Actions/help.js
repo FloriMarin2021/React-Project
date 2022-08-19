@@ -29,7 +29,7 @@ export const fetchDataSucces=(dataApi)=>{
 export const fetchDataError=(error)=>{
     return {
         type:'FETCH_DATA_ERROR',
-        payload:error
+        payload:{error}
     }
 }
 
