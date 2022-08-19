@@ -47,7 +47,7 @@ import Autocomplete from '@mui/material/Autocomplete';
                       />            
         :null}  
               
-        { props.value===1 && props.dataApi?  <div >{props.dataApi.data? <Autocomplete
+        { props.value===1&&props.dataApi?  <div >{props.dataApi.data? <Autocomplete
                      id="combo-box-demo"
                      options={props.dataApi.data}                     
                      getOptionLabel={(option) => option.employee_name}                
