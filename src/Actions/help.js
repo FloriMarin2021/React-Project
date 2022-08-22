@@ -33,18 +33,14 @@ export const fetchDataError=(error)=>{
     }
 }
 
-export const showSuccessSnackbar = () => {
-    return {
-        type:'SNACKBAR_SUCCESS',
-        
-    }    
-  };
   
 export const clearSnackbar = () => {
     return {
         type:'SNACKBAR_CLEAR'      
     }   
   };
+
+
 
 
 

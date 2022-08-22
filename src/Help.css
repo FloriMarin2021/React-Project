@@ -18,8 +18,12 @@
 
 .help_tab{
     border-right:1px solid ; 
-    overflow: scroll;
+    overflow: scroll;   
+}
 
-    
+.alert{ 
+    width: 80%; 
+    height: 100px;
+    align-items: center;
 }
 

@@ -5,10 +5,13 @@ import HelpTabs from './HelpTabs';
 import axios from 'axios'
 import {connect} from 'react-redux';
 import {tabValue, calendarChange, fetchDataRequest, 
-        fetchDataSucces, fetchDataError, showSuccessSnackbar, clearSnackbar} from './Actions/help';
+        fetchDataSucces, fetchDataError, clearSnackbar} from './Actions/help';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
+import Slide from "@mui/material/Slide";
+import Alert from "@mui/material/Alert";
+import Dialog from '@mui/material/Dialog';
 
 
 
@@ -18,7 +21,9 @@ class Help extends React.Component {
  
 handleChangeValue=(event, newValue)=>{
        this.props.tabValue(newValue); 
-       if(this.props.value===1){
+      // console.log("newValue", newValue)
+     //  console.log("value", this.props.value)
+       if(newValue===1){
         this.getDataApi();}
        }
  
@@ -29,6 +34,7 @@ handleCalendarChange=(newDate)=>{
 handleCloseSnackBar=()=>{
   this.props.clearSnackbar()
 }
+
 /*
  componentDidUpdate(prevProps) {
  // const value = this.props.value;
@@ -45,27 +51,26 @@ handleCloseSnackBar=()=>{
 }
 
 async getDataApi() {
-  if(this.props.value===1){  
+ 
   try{    
    this.props.fetchDataRequest(); 
    await axios.get(baseURL)
      .then(res => {
        const dataApi =res.data;          
       console.log("status", dataApi.status)
-    //   console.log("typeof", typeof(dataApi))
     //   console.log("data employees", dataApi.data) 
     //   console.log("message1", dataApi.message)       
       this.props.fetchDataSucces(dataApi);
-    //  this.props.showSuccessSnackbar();
+  
  
      })
   }  
   catch(error){
    this.props.fetchDataError(error);
-   //console.log("error message", this.props.error.message)
+   console.log("error message", this.props.error.message)
   // console.log("error message", this.props.error)
   }
-} 
+
  }
 
 
@@ -110,53 +115,41 @@ async componentDidMount() {
                handleCalendarChange={this.handleCalendarChange}
                dataApi={this.props.dataApi} 
                  />
-           </div> 
-           {this.props.dataApi?
-           <div>
-            {this.props.dataApi.data?<Snackbar
-                anchorOrigin={{
-                vertical: "top",
-                horizontal: "left"
-               }}
-               open={this.props.isSnackBarOpen}
+           </div>       
+           {this.props.dataApi&&this.props.dataApi.data? 
+           <Snackbar
+               anchorOrigin={{
+               vertical: "top",
+               horizontal: "left"
+                             }}
+               open={this.props.isOpen}
                autoHideDuration={4000}
+               TransitionComponent={Slide}
+               transitionDuration={{ enter: 1000, exit: 2000 }}
                onClose={this.handleCloseSnackBar}
                aria-describedby="client-snackbar"
-               message={this.props.dataApi.message}
+               message={this.props.dataApi.message} 
                action={[
-                  <IconButton
-                     key="close"
-                     aria-label="close"
-                     color="inherit"
-                     onClick={this.handleCloseSnackBar}
-                     >
+                 <IconButton
+                   key="close"
+                   aria-label="close"
+                   color="inherit"
+                   onClick={this.handleCloseSnackBar}
+                  >
                   <Icon>close</Icon>
-                 </IconButton>
-        ]}
-      />:null}
-           </div>: this.props.value===1? 
-                 <Snackbar
-                   anchorOrigin={{
-                   vertical: "top",
-                   horizontal: "left"
-                   }}
-                   open={this.props.isSnackBarOpen}
-                   autoHideDuration={4000}
-                   onClose={this.handleCloseSnackBar}
-                   aria-describedby="client-snackbar"
-                   message={this.props.error.message}
-                   action={[
-                        <IconButton
-                          key="close"
-                          aria-label="close"
-                          color="inherit"
-                          onClick={this.handleCloseSnackBar}
-                             >
-                          <Icon>close</Icon>
-                        </IconButton>
-                       ]}
-                  />:null
-                    }     
+                  </IconButton>
+                   ]}
+            />: this.props.value===1? 
+                 <Dialog
+                   open={this.props.isOpen}
+                   onClose={this.handleCloseSnackBar}               
+               >  
+                  <Alert severity="error" className='alert'>       
+                     Request failed 
+                  </Alert>            
+               </Dialog>:null
+        }
+            
       </div>
     );
     }
@@ -170,7 +163,7 @@ const mapStateToProps=(initialState)=>{
 
 export default connect(
 mapStateToProps, {tabValue, calendarChange, fetchDataRequest, 
-                  fetchDataSucces, fetchDataError, showSuccessSnackbar, clearSnackbar },
+                  fetchDataSucces, fetchDataError, clearSnackbar},
 
 ) (Help);
 

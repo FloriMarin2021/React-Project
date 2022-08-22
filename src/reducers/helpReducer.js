@@ -6,10 +6,11 @@ const initialState={
        ],    
     value:0, 
     date:new Date(),
-    loading:true,
+    isLoading:true,
     dataApi:null,
     error:'',
-    isSnackBarOpen:true,  
+    isOpen:true,
+   
  }
 
  export const helpReducer=(state=initialState, action)=>{
@@ -35,30 +36,26 @@ const initialState={
         case 'FETCH_DATA_SUCCESS':
                      return {
                           ...state, 
-                        loading:false,
+                        isLoading:false,
                         dataApi:action.payload.dataApi                                                         
                      }
              
          case 'FETCH_DATA_ERROR':
                  return {
                       ...state, 
-                     loading:false,
+                     isLoading:false,
                      dataApi:null,
                      error:action.payload.error
                   
                          } 
 
-        case "SNACKBAR_SUCCESS":
-                 return {
-                  ...state,
-                 isSnackBarOpen:true,
-                             
-                            };
          case "SNACKBAR_CLEAR":
                    return {
                    ...state,
-                  isSnackBarOpen:false
-                             }                  
+                  isOpen:false
+                             } 
+                             
+        
          
         default:
           return state;
