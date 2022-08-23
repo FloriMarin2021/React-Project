@@ -40,6 +40,13 @@ export const clearSnackbar = () => {
     }   
   };
 
+export const listDisplay=(option)=>{
+    return {
+        type:'LIST_OPTION',
+        payload:{option}
+    };
+};
+
 
 
 

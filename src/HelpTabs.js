@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { BrowserRouter as Router, Route, Link, Switch } 
+       from "react-router-dom";
 
 
  function HelpTabs(props) {
@@ -56,7 +58,35 @@ import Autocomplete from '@mui/material/Autocomplete';
                       <TextField {...params} label="Combo box" variant="outlined" />}
 
     />:null}</div>:null}
-        {props.value===2? <div> item 3 </div>:null}    
+        {props.value===2? 
+        <div>                  
+               {props.list.map((item, index)=>{
+                            return(
+                              <ul key={index}>
+                   { item.label==='google'?  <li  >
+                           {item.label}<br></br>
+                           <Link   to={item.link} target="_blank" >                             
+                              {item.link}    
+                            </Link>                                                       
+                                </li>:null}
+                   { item.label==='youtube'? <li >
+                           {item.label}<br></br>                         
+                           <Link  to={item.link} target="_self"  >
+                              {item.link}    
+                            </Link>                                                       
+                                </li>:null}     
+                   { item.label==='linkedin'? <li  onClick={props.handleWindow}>
+                           {item.label}<br></br>
+                           <Link  to={item.link} target="_blank" >
+                              {item.link}    
+                            </Link>                                                       
+                                </li>:null}                                  
+                              </ul>
+                            )
+                          }) }             
+         </div>          
+        :null} 
+          
        </div>
     );
   }

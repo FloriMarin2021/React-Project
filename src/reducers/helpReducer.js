@@ -1,3 +1,5 @@
+
+
 const initialState={
    tabOption: [
     { label:"Item One"},
@@ -10,6 +12,12 @@ const initialState={
     dataApi:null,
     error:'',
     isOpen:true,
+    list:[
+      {label:"google", link:"www.google.com"},
+      {label:"youtube", link:"www.youtube.com"},
+      {label:"linkedin", link:"https://linkedin.com/"}
+    ],
+  
    
  }
 
@@ -37,6 +45,7 @@ const initialState={
                      return {
                           ...state, 
                         isLoading:false,
+                        isOpen:true,
                         dataApi:action.payload.dataApi                                                         
                      }
              
@@ -44,8 +53,12 @@ const initialState={
                  return {
                       ...state, 
                      isLoading:false,
-                     dataApi:null,
-                     error:action.payload.error
+                     isOpen:true,
+                     dataApi:{
+                       ...state.dataApi,
+                       data:null,
+                       message:action.payload.error.message
+                    }
                   
                          } 
 
@@ -54,7 +67,12 @@ const initialState={
                    ...state,
                   isOpen:false
                              } 
-                             
+          
+          case 'LIST_OPTION':
+                return {
+                  ...state, 
+                  list:action.payload.list
+                       } 
         
          
         default:

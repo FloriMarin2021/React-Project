@@ -5,13 +5,12 @@ import HelpTabs from './HelpTabs';
 import axios from 'axios'
 import {connect} from 'react-redux';
 import {tabValue, calendarChange, fetchDataRequest, 
-        fetchDataSucces, fetchDataError, clearSnackbar} from './Actions/help';
+        fetchDataSucces, fetchDataError, clearSnackbar, listDisplay} from './Actions/help';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
 import Slide from "@mui/material/Slide";
-import Alert from "@mui/material/Alert";
-import Dialog from '@mui/material/Dialog';
+
 
 
 
@@ -21,11 +20,21 @@ class Help extends React.Component {
  
 handleChangeValue=(event, newValue)=>{
        this.props.tabValue(newValue); 
-      // console.log("newValue", newValue)
-     //  console.log("value", this.props.value)
+      // console.log("newValue HANDLE", newValue)
+     //  console.log("value HANDLE", this.props.value)
        if(newValue===1){
         this.getDataApi();}
-       }
+
+     
+      }
+  handleWindow=()=> {     
+       window.open(
+          "www.linkedin.com",
+          "",
+          "width=600, height=400, left=200, top=200"
+        );       
+      }
+ 
  
 handleCalendarChange=(newDate)=>{
     this.props.calendarChange(newDate)
@@ -46,8 +55,11 @@ handleCloseSnackBar=()=>{
  
 */
 
- componentDidMount(){
-   this.handleCalendarChange(); 
+ componentDidMount(newValue){
+
+  if(this.props.value===newValue){ 
+   this.handleChangeValue(newValue);    
+   }
 }
 
 async getDataApi() {
@@ -114,9 +126,12 @@ async componentDidMount() {
                date={this.props.date}
                handleCalendarChange={this.handleCalendarChange}
                dataApi={this.props.dataApi} 
+               list={this.props.list}
+               handleWindow={this.handleWindow}
+            
                  />
            </div>       
-           {this.props.dataApi&&this.props.dataApi.data? 
+           {this.props.dataApi&&this.props.dataApi.message? 
            <Snackbar
                anchorOrigin={{
                vertical: "top",
@@ -139,16 +154,8 @@ async componentDidMount() {
                   <Icon>close</Icon>
                   </IconButton>
                    ]}
-            />: this.props.value===1? 
-                 <Dialog
-                   open={this.props.isOpen}
-                   onClose={this.handleCloseSnackBar}               
-               >  
-                  <Alert severity="error" className='alert'>       
-                     Request failed 
-                  </Alert>            
-               </Dialog>:null
-        }
+            />:null}
+        
             
       </div>
     );
@@ -163,7 +170,7 @@ const mapStateToProps=(initialState)=>{
 
 export default connect(
 mapStateToProps, {tabValue, calendarChange, fetchDataRequest, 
-                  fetchDataSucces, fetchDataError, clearSnackbar},
+                  fetchDataSucces, fetchDataError, clearSnackbar, listDisplay},
 
 ) (Help);
 
