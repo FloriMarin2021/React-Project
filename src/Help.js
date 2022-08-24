@@ -14,6 +14,7 @@ import Slide from "@mui/material/Slide";
 
 
 
+
 const baseURL =  "https://dummy.restapiexample.com/api/v1/employees";
 
 class Help extends React.Component {
@@ -47,16 +48,15 @@ handleChangeWindow=(option)=>{
       );
      }
     else if(option.label==='youtube'){
-      window.open(
-      option.link,
-      "_self"            
-      )&& window.setTimeout(
-      option.link,
-        2000);
-    //  setTimeout(() => {          
-   //   }, 2000)    
-    }    
+      setTimeout(() => {          
+        window.location.replace(option.link)}, 2000)  
+      }
     }
+
+handleRedirectPage=()=>{
+  const path="/home"
+  window.location.replace(path)
+}
  
 handleCalendarChange=(newDate)=>{
     this.props.calendarChange(newDate)
@@ -104,8 +104,8 @@ async getDataApi() {
    console.log("error message", this.props.error.message)
   // console.log("error message", this.props.error)
   }
-
  }
+ 
 
 
 /*
@@ -150,6 +150,7 @@ async componentDidMount() {
                dataApi={this.props.dataApi} 
                list={this.props.list}
                handleChangeWindow={(option)=>this.handleChangeWindow(option)}
+               handleRedirectPage={this.handleRedirectPage}
                              />
            </div>       
            {this.props.dataApi&&this.props.dataApi.message? 

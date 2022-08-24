@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 
 
 const initialState={
@@ -17,7 +18,7 @@ const initialState={
       {label:"youtube", link:"www.youtube.com"},
       {label:"linkedin", link:"https://linkedin.com/"}
     ],
-  
+ 
 }
 
  export const helpReducer=(state=initialState, action)=>{

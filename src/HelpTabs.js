@@ -12,6 +12,9 @@ import Button from '@material-ui/core/Button';
 
 
 
+
+
+
 function HelpTabs(props) {
 //console.log("props date", props)
  //console.log("props dataApi", props.dataApi.data)
@@ -61,7 +64,11 @@ function HelpTabs(props) {
 
     />:null}</div>:null}
 
-        {props.value===2? <div >                      
+        {props.value===2?                        
+                        <div >
+                          <div>                         
+                          <p onClick={props.handleRedirectPage}> Home</p>
+                          </div>                      
                              {props.list.map((item, index)=>{                       
                                return (                 
                           <Button
