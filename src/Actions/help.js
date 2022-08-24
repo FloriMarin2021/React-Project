@@ -40,10 +40,10 @@ export const clearSnackbar = () => {
     }   
   };
 
-export const listDisplay=(option)=>{
+export const listDisplay=(describe)=>{
     return {
         type:'LIST_OPTION',
-        payload:{option}
+        payload:{describe}
     };
 };
 

@@ -26,7 +26,7 @@ async componentDidMount() {
   this.props.fetchProductsRequest();
 
   await axios.get(baseURL)
-    .then(res => {
+    .then(res => {      
       const products = res.data;
      // console.log("products", products)      
       this.props.fetchProductsSucces(products);
@@ -57,8 +57,7 @@ async componentDidMount() {
                   products={this.props.products}/>:null}
                 {this.props.displayMenu.id==='bars'?<BarsChartGraph                 
                   products={this.props.products}/>:null} 
-              
-                                         
+                                                           
               </div>                           
   } 
 }

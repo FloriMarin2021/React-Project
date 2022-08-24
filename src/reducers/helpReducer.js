@@ -13,13 +13,12 @@ const initialState={
     error:'',
     isOpen:true,
     list:[
-      {label:"google", link:"www.google.com"},
+      {label:"google", link:"https://www.google.com/"},
       {label:"youtube", link:"www.youtube.com"},
       {label:"linkedin", link:"https://linkedin.com/"}
     ],
   
-   
- }
+}
 
  export const helpReducer=(state=initialState, action)=>{
  
@@ -67,11 +66,11 @@ const initialState={
                    ...state,
                   isOpen:false
                              } 
-          
+         
           case 'LIST_OPTION':
                 return {
                   ...state, 
-                  list:action.payload.list
+                describe:action.payload.describe
                        } 
         
          

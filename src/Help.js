@@ -27,14 +27,36 @@ handleChangeValue=(event, newValue)=>{
 
      
       }
-  handleWindow=()=> {     
-       window.open(
-          "www.linkedin.com",
-          "",
-          "width=600, height=400, left=200, top=200"
-        );       
-      }
- 
+
+
+handleChangeWindow=(option)=>{ 
+    this.props.listDisplay(option);
+  //  console.log("option", option.label)
+   // console.log("link", option.link)
+    if(option.label==='linkedin'){
+      window.open(
+        option.link,
+        "",
+        "width=600, height=400, left=200, top=200"
+      ); 
+    }
+    else if(option.label==='google'){
+      window.open(
+        option.link,
+        "_blank"       
+      );
+     }
+    else if(option.label==='youtube'){
+      window.open(
+      option.link,
+      "_self"            
+      )&& window.setTimeout(
+      option.link,
+        2000);
+    //  setTimeout(() => {          
+   //   }, 2000)    
+    }    
+    }
  
 handleCalendarChange=(newDate)=>{
     this.props.calendarChange(newDate)
@@ -127,9 +149,8 @@ async componentDidMount() {
                handleCalendarChange={this.handleCalendarChange}
                dataApi={this.props.dataApi} 
                list={this.props.list}
-               handleWindow={this.handleWindow}
-            
-                 />
+               handleChangeWindow={(option)=>this.handleChangeWindow(option)}
+                             />
            </div>       
            {this.props.dataApi&&this.props.dataApi.message? 
            <Snackbar
@@ -163,7 +184,7 @@ async componentDidMount() {
   }
 
 const mapStateToProps=(initialState)=>{
-  
+
  return initialState.helpReducer  
 }
 

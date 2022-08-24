@@ -6,11 +6,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { BrowserRouter as Router, Route, Link, Switch } 
-       from "react-router-dom";
+//import {Link} from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 
- function HelpTabs(props) {
+
+
+function HelpTabs(props) {
 //console.log("props date", props)
  //console.log("props dataApi", props.dataApi.data)
 
@@ -58,35 +60,20 @@ import { BrowserRouter as Router, Route, Link, Switch }
                       <TextField {...params} label="Combo box" variant="outlined" />}
 
     />:null}</div>:null}
-        {props.value===2? 
-        <div>                  
-               {props.list.map((item, index)=>{
-                            return(
-                              <ul key={index}>
-                   { item.label==='google'?  <li  >
-                           {item.label}<br></br>
-                           <Link   to={item.link} target="_blank" >                             
-                              {item.link}    
-                            </Link>                                                       
-                                </li>:null}
-                   { item.label==='youtube'? <li >
-                           {item.label}<br></br>                         
-                           <Link  to={item.link} target="_self"  >
-                              {item.link}    
-                            </Link>                                                       
-                                </li>:null}     
-                   { item.label==='linkedin'? <li  onClick={props.handleWindow}>
-                           {item.label}<br></br>
-                           <Link  to={item.link} target="_blank" >
-                              {item.link}    
-                            </Link>                                                       
-                                </li>:null}                                  
-                              </ul>
-                            )
-                          }) }             
-         </div>          
-        :null} 
-          
+
+        {props.value===2? <div >                      
+                             {props.list.map((item, index)=>{                       
+                               return (                 
+                          <Button
+                           key={index} 
+                           onClick={()=>{props.handleChangeWindow(item)}}
+                           value={item.label}
+                           >{item.label} 
+                           </Button> 
+                              )
+                                })
+                                    }                                    
+                            </div> :null}    
        </div>
     );
   }
