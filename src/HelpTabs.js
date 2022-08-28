@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 //import {Link} from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -18,7 +19,7 @@ import Button from '@material-ui/core/Button';
 function HelpTabs(props) {
 //console.log("props date", props)
  //console.log("props dataApi", props.dataApi.data)
-
+ const navigate = useNavigate();
     return (
         
       <div className='help_tabs'>        
@@ -67,7 +68,7 @@ function HelpTabs(props) {
         {props.value===2?                        
                         <div >
                           <div>                         
-                          <p onClick={props.handleRedirectPage}> Home</p>
+                          <p onClick={() => navigate('/home')}> Home</p>
                           </div>                      
                              {props.list.map((item, index)=>{                       
                                return (                 

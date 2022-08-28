@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './Home';
 import Help from './Help';
 import Graph from './Graph';
+import Icons from './Icons';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -19,7 +20,8 @@ const App=()=>{
           <Route path="mytaskspage" element={<MyTasksPage/>}/>
           <Route path="graph" element={<Graph />} />
           <Route path="home" element={<Home />} />
-          <Route path="help" element={<Help/>} />      
+          <Route path="help" element={<Help/>} /> 
+          <Route path="icons" element={<Icons/>} />      
         </Routes>
     </BrowserRouter>   
    </div>

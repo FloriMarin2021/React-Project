@@ -13,8 +13,6 @@ import Slide from "@mui/material/Slide";
 
 
 
-
-
 const baseURL =  "https://dummy.restapiexample.com/api/v1/employees";
 
 class Help extends React.Component {
@@ -24,9 +22,7 @@ handleChangeValue=(event, newValue)=>{
       // console.log("newValue HANDLE", newValue)
      //  console.log("value HANDLE", this.props.value)
        if(newValue===1){
-        this.getDataApi();}
-
-     
+        this.getDataApi();}    
       }
 
 
@@ -53,10 +49,6 @@ handleChangeWindow=(option)=>{
       }
     }
 
-handleRedirectPage=()=>{
-  const path="/home"
-  window.location.replace(path)
-}
  
 handleCalendarChange=(newDate)=>{
     this.props.calendarChange(newDate)
@@ -150,8 +142,7 @@ async componentDidMount() {
                dataApi={this.props.dataApi} 
                list={this.props.list}
                handleChangeWindow={(option)=>this.handleChangeWindow(option)}
-               handleRedirectPage={this.handleRedirectPage}
-                             />
+                                            />
            </div>       
            {this.props.dataApi&&this.props.dataApi.message? 
            <Snackbar
