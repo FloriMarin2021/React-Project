@@ -20,5 +20,6 @@
 }
 
 .active {
-    background: lightgray;    
+    background: lightgray; 
+    font: 1em sans-serif;   
   }
