@@ -6,7 +6,7 @@
 }
 
 .icons_nav_menu{
-    width: 150px;
+    margin-top: 2px;
     
 }
 
@@ -20,6 +20,5 @@
 }
 
 .active {
-    background: lightgray; 
-    font: 1em sans-serif;   
+    background: lightgray;   
   }

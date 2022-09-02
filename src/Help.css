@@ -4,16 +4,14 @@
 }
 
 .help_menu{
-    width: 150px;
+    margin-top: 5px;
 }
 
 .help_tabs{
     display:flex;
     height: 224px;
     flex-grow: 1;  
-    flex-direction: column;
-   
-    
+    flex-direction: column;   
 }
 
 .help_tab{

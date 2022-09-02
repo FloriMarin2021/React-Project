@@ -6,10 +6,11 @@
     'sidebar main-start main-center'
     'sidebar main main-end';  
     overflow: hidden;     
-    grid-template-columns: 150px auto;
+    grid-template-columns: 250px auto;
     grid-template-rows: 100px auto;
     gap:0.2em;  
      }
+
 
 .navigation-menu {
    grid-area: sidebar;
@@ -22,14 +23,12 @@
 
 .task-table { 
   grid-area: main;
-  height: 450px;
-  width: 700px;
+  height: 450px; 
      }
 
 .task-form {
    grid-area:main-end;
-   height: 450px;
-   width: 500px;
+   height: 450px;   
 }
 
 .create-new {
@@ -58,7 +57,7 @@
    height: 30px;
    margin-top: 30px;
    width: 120px;
-   margin-left: 2px;
+   margin-left: 2px;  
 }
 
 .status_open{

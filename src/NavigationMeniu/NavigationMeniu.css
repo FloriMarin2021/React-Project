@@ -1,9 +1,37 @@
-.navigation-menu {
+
+.navigation_menu { 
     display: flex;
     justify-content:flex-start;
     margin: 1px;  
-    border: 2px solid black;
-    flex-direction: column;     
+    flex-direction: column;    
+    transition: width 0.3s ease-in-out; 
+    width: 160px;      
 }
+ 
+.navigation_menu_closed {   
+    display: flex;   
+    justify-content:flex-start;
+    margin: 1px;  
+    border:1px solid black;
+    flex-direction: column;
+    width: 60px; 
+    left: 0; 
+    transition: width 0.3s ease-in-out;     
+}
+
+.nav_item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    overflow: hidden;
+    height: 5vh;      
+}
+
+
+
+
+
 
 
