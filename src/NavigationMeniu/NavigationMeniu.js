@@ -65,7 +65,7 @@ const NavigationMeniu=()=>{
                 </button>             
               </div>          
 
-      {isOpen? <div className="navigation_menu"  >                  
+      <div className={isOpen? "navigation_menu":"navigation_menu_closed"} >                  
                  <button >{icons.map((item, index) =>{
                   return(
           <NavLink  className="nav_item"  key={index}  to={item.link} >                     
@@ -77,30 +77,12 @@ const NavigationMeniu=()=>{
                           index={index}
                           size={1} 
                           horizontal                                       
-                          /> {item.title}</span>
+                          />{isOpen? item.title: ''}</span>
                    </NavLink>
                    )
                })}
                   </button> 
-               </div>:
-        <div className="navigation_menu_closed">               
-                <button>{icons.map((item, index) =>{
-                  return (
-                  <NavLink  className="nav_item" key={index}  to={item.link} >                     
-                     <span>
-                       <Icon
-                          path={item.icon}
-                          title={item.title}
-                          color={item.color}
-                          index={index}
-                          size={1} 
-                          horizontal                                       
-                          />
-                      </span>
-                 </NavLink>
-                 )
-               })}
-              </button> </div>}
+               </div>
              
           </div>                
                 );
@@ -108,6 +90,3 @@ const NavigationMeniu=()=>{
 
 export default NavigationMeniu
     
-
-
-
